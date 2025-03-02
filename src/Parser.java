@@ -9,7 +9,7 @@ public class Parser {
     }
 
     
-private void initializeBuildingMap(String filename)
+public void initializeBuildingMap(String filename)
     {
         try(BufferedReader reader = new BufferedReader(new FileReader(filename)))
         {

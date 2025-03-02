@@ -16,5 +16,14 @@ public Node(String name, Hallway hallway, int positionAlongHallway, int floor)
 
 public abstract void displayInfo();
 
+@Override
+public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Node node = (Node) obj;
+    return Objects.equals(name, node.name);
+}
+
 
 }
+
