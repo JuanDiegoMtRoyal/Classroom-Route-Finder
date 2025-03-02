@@ -9,3 +9,5 @@ public class Stairs extends Node{
         System.out.println("Stairs: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
     
 }
+
+}

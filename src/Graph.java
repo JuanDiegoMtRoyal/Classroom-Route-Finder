@@ -9,21 +9,60 @@ public class Graph {
         hallways = new ArrayList<>();
     }
 
+/**
+ * @brief 
+ *
+ * 
+ *
+ * @param 
+ */
     public void addNode(Node node) {
         nodes.put(node.name, node);
     }
 
+/**
+ * @brief 
+ *
+ * 
+ *
+ * @param 
+ */
     public void addHallway(Hallway hallway) {
         hallways.add(hallway);
     }
 
+/**
+ * @brief 
+ *
+ * 
+ *
+ * @param 
+ */
     public List<Node> getNodesAlongHallway(Hallway hallway) {
         return hallway.getNodes();
     }
 
+        
+/**
+ * @brief 
+ *
+ * 
+ *
+ * @param 
+ */
     public Node getNode(String name) {
         return nodes.get(name);
     }
 
+/**
+ * @brief 
+ *
+ * 
+ *
+ * @param 
+ */
+    public List<Hallway> getHallways() {
+        return hallways;
+    }
     
 }

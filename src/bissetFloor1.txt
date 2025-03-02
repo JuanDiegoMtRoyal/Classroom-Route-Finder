@@ -30,35 +30,18 @@ EB1028(bisset, hallwayEB1_SE_NW, 56, NW, 1)
 stairsEB02_F1(bisset, hallwayEB1_SE_NW, 60, NW, stairsEB02_F2, 1)
 stairsEB03_F1(bisset, hallwayEB1_SW_NE, 50, NE, stairsEB03_F2, 1)
 stairsEB04_F1(bisset, hallwayEB1_SW_NE, 0, SW, stairsEB04_F2, 1)
-stairsEB02_F2(bisset, , , , stairsEB02_F1, stairsEB02_F3 2)
-stairsEB03_F2(bisset, , , , stairsEB03_F1, stairsEB03_F3, 2)
-stairsEB04_F2(bisset, , , , stairsEB04_F1, stairsEB04_F3, 2)
-stairsEB02_F3(bisset, , , , stairsEB02_F2, 2)
-stairsEB03_F3(bisset, , , , stairsEB03_F2, 2)
-stairsEB04_F3(bisset, , , , stairsEB04_F2, 2)
 
 
 # Elevator Format: elevatorName (building, hallway, positionAlongHallway, compassCoordinate, teleportTo..., floor)
 elevatorEB02_F1(bisset, hallwayEB1_SW_NE, 50, NE, elevatorEB02_F2, 1)
 elevatorEB01_F1(bisset, hallwayEB1_SW_NE, 4, NE, elevatorEB01_F2, 1)
-elevatorEB02_F2(bisset, , , , elevatorEB02_F1, elevatorEB02_F3, 2)
-elevatorEB01_F2(bisset, , , , elevatorEB01_F1, elevatorEB01_F3, 2)
-elevatorEB02_F3(bisset, , , , elevatorEB02_F2, 3)
-elevatorEB01_F3(bisset, , , , elevatorEB01_F2, 3)
+
 
 
 # Intersection Format: intersectionName(floor, connectedPaths...)
 bisset_South_Intersection_F1(1, hallwayEB1_SW_NE, hallwayEB1_SE_NW, stairsEB04_F1, elevatorEB01_F1)
 bisset_NorthEast_Intersection_F1(1, stairsEB03_F1, elevatorEB02_F1)
 bisset_NorthWest_Intersection_F1(1, stairsEB02_F1)
-
-
-
-
-
-
-
-
 
 
 
