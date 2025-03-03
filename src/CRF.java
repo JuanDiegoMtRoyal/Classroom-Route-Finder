@@ -98,7 +98,7 @@ public class CRF {
      */
     private int calculateTimeCost(Node from, Node to) {
         // Calculate the time cost based on the distance between nodes
-        return Math.abs(to.positionAlongHallway - from.positionAlongHallway);
+        return Math.abs(to.positionAlongHallway - from.positionAlongHallway); //need to decide on time constrain maybe 1.4m = 1 sec?
     }
 
     
@@ -120,12 +120,4 @@ public class CRF {
     }
 
 
-   
-
-    
-
-
-
-
-    
 }

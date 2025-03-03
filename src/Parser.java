@@ -81,7 +81,7 @@ public void initializeBuildingMap(String filename)
 
     private void parseHallway(String line)
     {
-        String[] parts = line.split("[()]");
+        String[] parts = line.split("[(),]");
         if(parts.length < 7)
         {
             System.err.println("Invalid hallway format: " + line);

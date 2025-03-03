@@ -2,8 +2,8 @@
 
 
 # Hallway Format: hallwayName(Building, Start_Intersection, Direction1, Direction2, Floor, Length) #length in meters
-hallwayEB1_SW_NE(bisset, bisset_South_Intersection_F1, sw, ne, 1, 50) #intitial start 0m is at south intersection
-hallwayEB1_SE_NW(bisset, bisset_South_Intersection_F1, se, nw, 1, 60) #intitial start 0m is at south intersection
+hallwayEB1_SW_NE(bisset, bisset_South_Intersection_F1, sw, ne, 1, 50) 
+hallwayEB1_SE_NW(bisset, bisset_South_Intersection_F1, se, nw, 1, 60) 
 
 
 # Classroom Format: ClassroomNumber (building, hallway, positionAlongHallway, compassCoordinate, floor)
