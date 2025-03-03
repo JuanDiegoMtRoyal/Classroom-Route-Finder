@@ -33,12 +33,7 @@ public class UserInput {
             // Find and display the route
             System.out.println("\nFinding route...");
             List<Node> route = crf.findRoute(startRoom, endRoom, timeConstraint, mobilityConstraints);
-            if (route == null) {
-                System.out.println("No route found or classroom does not exist.\n");
-            } else {
-                System.out.println("Route found:");
-                crf.displayRoute(route);
-            }
+            crf.displayRoute(route);
 
             System.out.println("------------------------------------------------------\n");
         }
