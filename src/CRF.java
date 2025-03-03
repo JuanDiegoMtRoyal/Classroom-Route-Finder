@@ -34,7 +34,8 @@ public class CRF {
 
         // Perform DFS with backtracking
         List<Node> route = new ArrayList<>();
-        boolean found = dfs(startNode, endNode, timeConstraint * 60, mobilityConstraints, new HashSet<>(), route);
+        Set<Node> visited = new HashSet<>();
+        boolean found = dfs(startNode, endNode, timeConstraint * 60, mobilityConstraints, visited, route);
 
         if (found) {
             return route;
@@ -66,7 +67,7 @@ public class CRF {
 
         // Traverse along the hallway
         Hallway currentHallway = current.hallway;
-        for (Node neighbor : graph.getNodesAlongHallway(currentHallway)) {
+        for (Node neighbor : getConnectedNodes(current)) {
             if (!visited.contains(neighbor)) {
                 int timeCost = calculateTimeCost(current, neighbor);
                 if (remainingTime - timeCost >= 0) {
@@ -99,6 +100,36 @@ public class CRF {
     private int calculateTimeCost(Node from, Node to) {
         // Calculate the time cost based on the distance between nodes
         return Math.abs(to.positionAlongHallway - from.positionAlongHallway); //need to decide on time constrain maybe 1.4m = 1 sec?
+    }
+
+    /**
+     * Gets all the nodes connected to the list (route or visited)
+     * @param node
+     * @return
+     */
+    public List<Node> getConnectedNodes(Node node) {
+        List<Node> connectedNodes = new ArrayList<>();
+
+        // Get nodes in the same hallway
+        if (node.hallway != null) {
+            connectedNodes.addAll(graph.getNodesAlongHallway(node.hallway));
+        }
+
+        // Get intersection connections
+        if (node instanceof Intersection) {
+            connectedNodes.addAll(((Intersection) node).getConnectedNodes());
+        }
+
+        // Handle stairs/elevators
+        if (node instanceof Stairs || node instanceof Elevator) {
+            for (Node possibleConnection : graph.getAllNodes()) {
+                if (possibleConnection.name.equals(node.name) && possibleConnection.floor != node.floor) {
+                    connectedNodes.add(possibleConnection);
+                }
+            }
+        }
+
+        return connectedNodes;
     }
 
     
