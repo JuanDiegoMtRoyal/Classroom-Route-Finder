@@ -9,6 +9,15 @@ public class Graph {
         hallways = new ArrayList<>();
     }
 
+
+    /**
+     * A getter function
+     * @return
+     */
+    public Collection<Node> getAllNodes() {
+        return nodes.values();
+    }
+
 /**
  * @brief 
  *
