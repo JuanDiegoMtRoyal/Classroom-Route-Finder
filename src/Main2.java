@@ -5,7 +5,7 @@ public class Main2 {
 
         // Parse the building map
         Parser parser = new Parser(graph);
-        parser.initializeBuildingMap("bissetFloor1.txt");
+        parser.initializeBuildingMap("data/bissetFloor1.txt");
 
         // Create the Classroom Route Finder
         CRF crf = new CRF(graph);
