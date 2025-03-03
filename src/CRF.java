@@ -65,8 +65,7 @@ public class CRF {
         visited.add(current);
         route.add(current);
 
-        // Traverse along the hallway
-        Hallway currentHallway = current.hallway;
+        // Traverses hallway and its associated nodes
         for (Node neighbor : getConnectedNodes(current)) {
             if (!visited.contains(neighbor)) {
                 int timeCost = calculateTimeCost(current, neighbor);
