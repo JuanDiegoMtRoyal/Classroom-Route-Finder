@@ -53,8 +53,8 @@ public class CRF {
 
         // Traverses hallway and its associated nodes
         for (Node neighbor : current.hallway.getNodes()) {
+            int timeCost = calculateTimeCost(current, neighbor);
             if (!visited.contains(neighbor)) {
-                int timeCost = calculateTimeCost(current, neighbor);
                 if (remainingTime - timeCost >= 0) {
                     if (mobilityConstraints && neighbor instanceof Stairs) {
                         // Check if there is an elevator alternative
@@ -63,10 +63,13 @@ public class CRF {
                     if (dfs(neighbor, end, remainingTime - timeCost, mobilityConstraints, visited, route)) {
                         return true;
                     }
+                    remainingTime += timeCost;
                 }
-                remainingTime += timeCost;
             }
         }
+        // Backtrack
+        route.remove(route.size() - 1);
+        visited.remove(current);
         return false;
     }
 
