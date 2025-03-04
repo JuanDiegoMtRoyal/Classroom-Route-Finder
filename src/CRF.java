@@ -45,13 +45,11 @@ public class CRF {
     }
 
     private boolean dfs(Node current, Node end, int remainingTime, boolean mobilityConstraints, Set<Node> visited, List<Node> route) {
-        if (current.equals(end)) {
-            route.add(current);
-            return true;
-        }
-
         visited.add(current);
         route.add(current);
+        if (current.equals(end)) {
+            return true;
+        }
 
         // Traverses hallway and its associated nodes
         for (Node neighbor : current.hallway.getNodes()) {
@@ -62,17 +60,13 @@ public class CRF {
                         // Check if there is an elevator alternative
                         continue;
                     }
-
                     if (dfs(neighbor, end, remainingTime - timeCost, mobilityConstraints, visited, route)) {
                         return true;
                     }
                 }
+                remainingTime += timeCost;
             }
         }
-
-        // Backtrack
-        route.remove(route.size() - 1);
-        visited.remove(current);
         return false;
     }
 
@@ -105,6 +99,5 @@ public class CRF {
             node.displayInfo();
         }
     }
-
 
 }
