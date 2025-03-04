@@ -46,8 +46,10 @@ public class Main {
         System.out.println("1.) Initializing Graph...\n        => " + graph.getAllNodes());
 
         Parser parser = new Parser(graph);
+        System.out.println("2a.) Parsing Building Map...");
+        parser.initializeBuildingMap("bissetFloor1.txt");
+        System.out.println("2b.) Parsing Building Map...");
         parser.initializeBuildingMap("../data/bissetFloor1.txt");
-        System.out.println("2.) Parsing Building Map...");
 
         CRF crf = new CRF(graph);
         System.out.println("3.) Creating Classroom Route Finder...\n    Graph consists of:");
