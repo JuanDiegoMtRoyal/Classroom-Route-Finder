@@ -8,22 +8,17 @@ public class Main {
             return;
         }
 
-
         String startRoom = args[0]; // Starting classroom
         String endRoom = args[1];   // Destination classroom
         int timeConstraint = Integer.parseInt(args[2]); // Time constraint in minutes /add catch block incase they dont enter a number
         boolean mobilityConstraints = Boolean.parseBoolean(args[3]); // Mobility constraints (true/false)
-    
-
-
-
 
         // Create the graph
         Graph graph = new Graph();
 
         // Parse the building map
         Parser parser = new Parser(graph);
-        parser.initializeBuildingMap("bissetFloor1.txt");
+        parser.initializeBuildingMap("../data/bissetFloor1.txt");
 
         // Create the CRF (Classroom Route Finder)
         CRF crf = new CRF(graph);
