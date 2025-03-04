@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 
 public class CRF {
@@ -45,17 +44,6 @@ public class CRF {
         }
     }
 
-    /**
-     * Recursive DFS method to find a route from the current node to the destination node.
-     *
-     * @param current            The current node.
-     * @param end                The destination node.
-     * @param remainingTime      The remaining time (in seconds).
-     * @param mobilityConstraints Whether mobility constraints are enabled.
-     * @param visited            A set of visited nodes to avoid cycles.
-     * @param route              The current route being explored.
-     * @return True if a route is found, false otherwise.
-     */
     private boolean dfs(Node current, Node end, int remainingTime, boolean mobilityConstraints, Set<Node> visited, List<Node> route) {
         if (current.equals(end)) {
             route.add(current);
@@ -66,7 +54,7 @@ public class CRF {
         route.add(current);
 
         // Traverses hallway and its associated nodes
-        for (Node neighbor : getConnectedNodes(current)) {
+        for (Node neighbor : current.hallway.getNodes()) {
             if (!visited.contains(neighbor)) {
                 int timeCost = calculateTimeCost(current, neighbor);
                 if (remainingTime - timeCost >= 0) {
@@ -100,37 +88,6 @@ public class CRF {
         // Calculate the time cost based on the distance between nodes
         return Math.abs(to.positionAlongHallway - from.positionAlongHallway); //need to decide on time constrain maybe 1.4m = 1 sec?
     }
-
-    /**
-     * Gets all the nodes connected to the list (route or visited)
-     * @param node
-     * @return
-     */
-    public List<Node> getConnectedNodes(Node node) {
-        List<Node> connectedNodes = new ArrayList<>();
-
-        // Get nodes in the same hallway
-        if (node.hallway != null) {
-            connectedNodes.addAll(graph.getNodesAlongHallway(node.hallway));
-        }
-
-        // Get intersection connections
-        if (node instanceof Intersection) {
-            connectedNodes.addAll(((Intersection) node).getConnectedNodes());
-        }
-
-        // Handle stairs/elevators
-        if (node instanceof Stairs || node instanceof Elevator) {
-            for (Node possibleConnection : graph.getAllNodes()) {
-                if (possibleConnection.name.equals(node.name) && possibleConnection.floor != node.floor) {
-                    connectedNodes.add(possibleConnection);
-                }
-            }
-        }
-
-        return connectedNodes;
-    }
-
     
     /**
      * Displays the route directions.
