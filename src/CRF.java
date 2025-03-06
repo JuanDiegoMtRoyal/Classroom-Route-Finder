@@ -45,31 +45,43 @@ public class CRF {
     }
 
     private boolean dfs(Node current, Node end, int remainingTime, boolean mobilityConstraints, Set<Node> visited, List<Node> route) {
-        visited.add(current);
-        route.add(current);
         if (current.equals(end)) {
             return true;
         }
+        route.add(current);
+        visited.add(current);
 
-        // Traverses hallway and its associated nodes
-        for (Node neighbor : current.hallway.getNodes()) {
-            int timeCost = calculateTimeCost(current, neighbor);
-            if (!visited.contains(neighbor)) {
-                if (remainingTime - timeCost >= 0) {
-                    if (mobilityConstraints && neighbor instanceof Stairs) {
-                        // Check if there is an elevator alternative
-                        continue;
-                    }
-                    if (dfs(neighbor, end, remainingTime - timeCost, mobilityConstraints, visited, route)) {
-                        return true;
-                    }
-                    remainingTime += timeCost;
+        // Traverses current hallway and its associated nodes
+        if (current.hallway != null){
+            for (Node neighbor : current.hallway.getNodes()) {
+                // if we reach an intersection and still need to traverse the next hallway, switch hallways
+                // need to fix if more than 2 hallways, but leave as is for now
+                if (current.hallway != end.hallway && current.positionAlongHallway == current.hallway.startIntersection.positionAlongHallway){
+                    current.hallway = end.hallway;
                 }
-            }
+                int timeCost = calculateTimeCost(current, neighbor);
+                if (!visited.contains(neighbor)) {
+                    if (remainingTime - timeCost >= 0) {
+                        if (mobilityConstraints && neighbor instanceof Stairs) {
+                            // Check if there is an elevator alternative
+                            continue;
+                        }
+                        if (dfs(neighbor, end, remainingTime - timeCost, mobilityConstraints, visited, route)) {
+                            return true;
+                        }
+                        remainingTime += timeCost;
+                    }
+                }
+            }            
         }
+
+
         // Backtrack
-        route.remove(route.size() - 1);
+        if (!route.isEmpty()){
+            route.remove(route.size() - 1);
+        }
         visited.remove(current);
+        
         return false;
     }
 
