@@ -1,6 +1,12 @@
 # Building: Bisset Business Building
 
 
+# Intersection Format: intersectionName(floor, connectedPaths...)
+bisset_South_Intersection_F1(1, hallwayEB1_SW_NE, hallwayEB1_SE_NW, stairsEB04_F1, elevatorEB01_F1)
+bisset_NorthEast_Intersection_F1(1, stairsEB03_F1, elevatorEB02_F1)
+bisset_NorthWest_Intersection_F1(1, stairsEB02_F1)
+
+
 # Hallway Format: hallwayName(Building, Start_Intersection, Direction1, Direction2, Floor, Length) #length in meters
 hallwayEB1_SW_NE(bisset, bisset_South_Intersection_F1, sw, ne, 1, 50) 
 hallwayEB1_SE_NW(bisset, bisset_South_Intersection_F1, se, nw, 1, 60) 
@@ -38,10 +44,6 @@ elevatorEB01_F1(bisset, hallwayEB1_SW_NE, 4, NE, elevatorEB01_F2, 1)
 
 
 
-# Intersection Format: intersectionName(floor, connectedPaths...)
-bisset_South_Intersection_F1(1, hallwayEB1_SW_NE, hallwayEB1_SE_NW, stairsEB04_F1, elevatorEB01_F1)
-bisset_NorthEast_Intersection_F1(1, stairsEB03_F1, elevatorEB02_F1)
-bisset_NorthWest_Intersection_F1(1, stairsEB02_F1)
 
 
 
