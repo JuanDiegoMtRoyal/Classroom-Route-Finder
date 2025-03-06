@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 
 public class Parser {
@@ -25,7 +24,11 @@ public void initializeBuildingMap(String filename)
 
                 if(line.startsWith("#"))
                 {
-                  if(line.contains("Hallway Format"))
+                if(line.contains("Intersection Format"))
+                {
+                    currentSection = "Intersection";
+                }
+                  else if(line.contains("Hallway Format"))
                   {
                     currentSection = "Hallway";
                   }  
@@ -40,10 +43,6 @@ public void initializeBuildingMap(String filename)
                   else if(line.contains("Elevator Format"))
                   {
                     currentSection = "Elevator";
-                  }
-                  else if(line.contains("Intersection Format"))
-                  {
-                    currentSection = "Intersection";
                   }
                   continue;
                 }
@@ -98,6 +97,9 @@ public void initializeBuildingMap(String filename)
 
         //create hallway
         Intersection startIntersection = (Intersection) graph.getNode(startIntersectionName);
+        if (startIntersection == null) {
+            System.err.println("Warning: Intersection " + startIntersectionName + " not found for hallway " + name);
+        }
         Hallway hallway = new Hallway(name, building, startIntersection, direction1, direction2, floor, length);
         graph.addHallway(hallway);
 
