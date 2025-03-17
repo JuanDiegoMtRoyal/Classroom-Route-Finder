@@ -1,0 +1,70 @@
+# Building: Bisset Business Building
+
+
+# Hallway Format: hallwayName(Building, Start_Intersection, Direction1, Direction2, Floor, Length) #length in meters
+hallwayEB1_SW_NE(bisset, bisset_South_Intersection_F1, sw, ne, 1, 50) #intitial start 0m is at south intersection
+hallwayEB1_SE_NW(bisset, bisset_South_Intersection_F1, se, nw, 1, 60) #intitial start 0m is at south intersection
+
+hallwayEB2_SW_NE(bisset, bisset_South_Intersection_F2, sw, ne, 2, 50)
+hallwayEB2_SE_NW(bisset, bisset_South_Intersection_F2, se, nw, 2, 60)
+
+
+# Classroom Format: ClassroomNumber (building, hallway, positionAlongHallway, compassCoordinate, floor)
+EB1113(bisset, hallwayEB1_SW_NE, 28, NE, 1)
+EB1112(bisset, hallwayEB1_SW_NE, 28, NE, 1)
+EB1109(bisset, hallwayEB1_SW_NE, 24, NE, 1)
+EB1108(bisset, hallwayEB1_SW_NE, 24, SE, 1)
+EB1102(bisset, hallwayEB1_SW_NE, 16, SE, 1)
+EB1107(bisset, hallwayEB1_SW_NE, 16, SE, 1)
+EB1002(bisset, hallwayEB1_SE_NW, 12, SW, 1)
+EB1006(bisset, hallwayEB1_SE_NW, 16, SW, 1)
+EB1007(bisset, hallwayEB1_SE_NW, 20, SW, 1)
+EB1010(bisset, hallwayEB1_SE_NW, 32, NW, 1)
+EB1011(bisset, hallwayEB1_SE_NW, 34, NW, 1)
+EB1014(bisset, hallwayEB1_SE_NW, 36, NW, 1)
+EB1015(bisset, hallwayEB1_SE_NW, 44, NW, 1)
+EB1022(bisset, hallwayEB1_SE_NW, 48, NW, 1)
+EB1023(bisset, hallwayEB1_SE_NW, 52, NW, 1)
+EB1028(bisset, hallwayEB1_SE_NW, 56, NW, 1)
+
+EB2138(bisset, hallwayEB2_SW_NE, 50, NE, 2) 
+EB2136(bisset, hallwayEB2_SW_NE, 46, NE, 2) 
+EB2128(bisset, hallwayEB2_SW_NE, 30, NE, 2) 
+EB2122(bisset, hallwayEB2_SW_NE, 22, NE, 2) 
+EB2121(bisset, hallwayEB2_SW_NE, 18, NE, 2) 
+EB2103(bisset, hallwayEB2_SW_NE, 6, SE, 2) 
+EB2002(bisset, hallwayEB2_SE_NW, 8, SW, 2) 
+EB2029(bisset, hallwayEB2_SE_NW, 32, NW, 2) 
+EB2039(bisset, hallwayEB2_SE_NW, 44, NW, 2) 
+
+
+# Stairs Format: stairsName (building, hallway, positionAlongHallway, compassCoordinate, teleportTo..., floor)
+
+stairsEB02_F1(bisset, hallwayEB1_SE_NW, 60, NW, stairsEB02_F2, 1)
+stairsEB03_F1(bisset, hallwayEB1_SW_NE, 50, NE, stairsEB03_F2, 1)
+stairsEB04_F1(bisset, hallwayEB1_SW_NE, 0, SW, stairsEB04_F2, 1)
+stairsEB02_F2(bisset, , , , stairsEB02_F1, stairsEB02_F3 2)
+stairsEB03_F2(bisset, , , , stairsEB03_F1, stairsEB03_F3, 2)
+stairsEB04_F2(bisset, , , , stairsEB04_F1, stairsEB04_F3, 2)
+stairsEB02_F3(bisset, , , , stairsEB02_F2, 2)
+stairsEB03_F3(bisset, , , , stairsEB03_F2, 2)
+stairsEB04_F3(bisset, , , , stairsEB04_F2, 2)
+
+
+# Elevator Format: elevatorName (building, hallway, positionAlongHallway, compassCoordinate, teleportTo..., floor)
+elevatorEB02_F1(bisset, hallwayEB1_SW_NE, 50, NE, elevatorEB02_F2, 1)
+elevatorEB01_F1(bisset, hallwayEB1_SW_NE, 4, NE, elevatorEB01_F2, 1)
+elevatorEB02_F2(bisset, , , , elevatorEB02_F1, elevatorEB02_F3, 2)
+elevatorEB01_F2(bisset, , , , elevatorEB01_F1, elevatorEB01_F3, 2)
+elevatorEB02_F3(bisset, , , , elevatorEB02_F2, 3)
+elevatorEB01_F3(bisset, , , , elevatorEB01_F2, 3)
+
+
+# Intersection Format: intersectionName(floor, connectedPaths...)
+bisset_South_Intersection_F1(1, hallwayEB1_SW_NE, hallwayEB1_SE_NW, stairsEB04_F1, elevatorEB01_F1)
+bisset_NorthEast_Intersection_F1(1, stairsEB03_F1, elevatorEB02_F1)
+bisset_NorthWest_Intersection_F1(1, stairsEB02_F1)
+
+
+
+
