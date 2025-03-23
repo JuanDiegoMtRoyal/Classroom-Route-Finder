@@ -93,4 +93,3 @@ bisset_South_Intersection_F3(3, hallwayEB3_SW_NE, hallwayEB3_SE_NW, stairsEB04_F
 bisset_NorthEast_Intersection_F3(3, stairsEB03_F3, elevatorEB02_F3)
 bisset_NorthWest_Intersection_F3(3, stairsEB02_F3)
 
-
