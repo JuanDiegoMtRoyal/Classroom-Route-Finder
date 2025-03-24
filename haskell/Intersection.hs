@@ -30,9 +30,5 @@ addConnectedNode node intersection = intersection { connectedNodes = node : conn
 getConnectedNode :: Intersection -> [Node]
 getConnectedNode intersection = connectedNodes intersection
 
--- fix
--- use mapM_ for displaying connected nodes?
 displayInfo :: Intersection -> IO()
-displayInfo intersection = do putStrLn ("Classroom: " ++ intersectionName intersection ++ " at " ++ show (intersectionPositionAlongHallway intersection) ++ "m along " ++ hallwayName (intersectionHallway intersection))
-                              putStrLn ("Connected Nodes: ")
-                              mapM_ 
+displayInfo intersection = putStrLn ("Classroom: " ++ intersectionName intersection ++ " at " ++ show (intersectionPositionAlongHallway intersection) ++ "m along " ++ hallwayName (intersectionHallway intersection))
