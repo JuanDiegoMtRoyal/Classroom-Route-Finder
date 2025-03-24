@@ -1,7 +1,8 @@
 module Stairs
 (
     Stairs,
-    
+
+    addConnectedFloor,
     displayInfo
 )
 where
@@ -14,6 +15,7 @@ data Stairs = Stairs
       stairHallway :: Hallway,
       stairPositionAlongHallway :: Int,
       stairFloor :: Int
+	  stairsConnectedFloors :: [String]
     } deriving (Show)
 
 -- constructor
@@ -21,5 +23,8 @@ createStairs :: String -> Hallway -> Int -> Int -> Stairs
 createStairs name hallway positionAlongHallway floor
 
 -- functions
+addConnectedFloor :: String -> [String] -> [String]
+addConnectedFloor stair connectedFloors = stair : connectedFloors
+
 displayInfo :: Stairs -> IO()
 displayInfo stairs = putStrLn ("Stairs: " ++ stairName stairs ++ " at " ++ show (stairPositionAlongHallway stairs) ++ "m along " ++ hallwayName (stairHallway stairs))
