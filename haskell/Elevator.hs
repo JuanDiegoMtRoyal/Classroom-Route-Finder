@@ -6,6 +6,9 @@ module Elevator
 )
 where
 
+import Node (Node(..))
+import Hallway (Hallway(..))
+
 data Elevator = Elevator
     { elevatorName :: String,
       elevatorHallway :: Hallway,

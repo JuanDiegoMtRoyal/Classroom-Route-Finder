@@ -6,6 +6,9 @@ module Classroom
 )
 where
 
+import Node (Node(..))
+import Hallway (Hallway(..))
+
 data Classroom = Classroom
     { classroomName :: String
       classroomBuilding :: String

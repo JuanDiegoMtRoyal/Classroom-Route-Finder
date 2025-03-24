@@ -6,6 +6,9 @@ module Stairs
 )
 where
 
+import Node (Node(..))
+import Hallway (Hallway(..))
+
 data Stairs = Stairs
     { stairName :: String,
       stairHallway :: Hallway,

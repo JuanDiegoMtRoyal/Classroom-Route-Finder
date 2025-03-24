@@ -9,6 +9,9 @@ module Hallway
 )
 where
 
+import Node (Node(..))
+import Intersection (Intersection(..))
+
 data Hallway = Hallway
     { hallwayName :: String,
       hallwayBuilding :: String,

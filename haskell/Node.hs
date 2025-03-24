@@ -7,6 +7,8 @@ module Node
 )
 where
 
+import Hallway (Hallway(..))
+
 data Node = Node
     { nodeName :: String,
       nodeHallway :: Hallway,
