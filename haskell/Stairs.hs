@@ -16,8 +16,10 @@ data Stairs = Stairs
       stairFloor :: Int
     } deriving (Show)
 
+-- constructor
 createStairs :: String -> Hallway -> Int -> Int -> Stairs
 createStairs name hallway positionAlongHallway floor
 
+-- functions
 displayInfo :: Stairs -> IO()
 displayInfo stairs = putStrLn ("Stairs: " ++ stairName stairs ++ " at " ++ show (stairPositionAlongHallway stairs) ++ "m along " ++ hallwayName (stairHallway stairs))

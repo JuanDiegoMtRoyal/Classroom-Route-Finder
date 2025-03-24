@@ -18,8 +18,10 @@ data Classroom = Classroom
       classroomFloor :: Int
     } deriving (Show)
 
+-- constructor
 createClassroom :: String -> String -> Hallway -> Int -> String -> Int
 createClassroom name building hallway positionAlongHallway compassDirection floor
 
+-- functions
 displayInfo :: Classroom -> IO()
 displayInfo classroom = putStrLn ("Classroom: " ++ classroomName classroom ++ " at " ++ show (classroomPositionAlongHallway classroom) ++ "m along " ++ hallwayName (classroomHallway classroom))

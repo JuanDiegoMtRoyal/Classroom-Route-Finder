@@ -20,5 +20,6 @@ data Elevator = Elevator
 createElevator :: String -> Hallway -> Int -> Int -> Elevator
 createElevator name hallway positionAlongHallway floor
 
+-- functions
 displayInfo :: Elevator -> IO()
 displayInfo elevator = putStrLn ("Elevator: " ++ elevatorName elevator ++ " at " ++ show (elevatorPositionAlongHallway elevator) ++ "m along " ++ hallwayName (elevatorHallway elevator))
