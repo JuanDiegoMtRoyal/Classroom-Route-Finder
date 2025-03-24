@@ -15,7 +15,7 @@ data Stairs = Stairs
       stairHallway :: Hallway,
       stairPositionAlongHallway :: Int,
       stairFloor :: Int
-	  stairsConnectedFloors :: [String]
+      stairsConnectedFloors :: [String]
     } deriving (Show)
 
 -- constructor
@@ -24,7 +24,7 @@ createStairs name hallway positionAlongHallway floor
 
 -- functions
 addConnectedFloor :: String -> [String] -> [String]
-addConnectedFloor stair connectedFloors = stair : connectedFloors
+addConnectedFloor name connectedFloors = name : connectedFloors
 
 displayInfo :: Stairs -> IO()
 displayInfo stairs = putStrLn ("Stairs: " ++ stairName stairs ++ " at " ++ show (stairPositionAlongHallway stairs) ++ "m along " ++ hallwayName (stairHallway stairs))
