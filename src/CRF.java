@@ -31,7 +31,6 @@ public class CRF {
             return null;
         }
 
-        // Perform DFS with backtracking
         List<Node> route = new ArrayList<>();
         Set<Node> visited = new HashSet<>();
         boolean found = dfs(startNode, endNode, timeConstraint * 60, mobilityConstraints, visited, route);
@@ -45,46 +44,44 @@ public class CRF {
     }
 
     private boolean dfs(Node current, Node end, int remainingTime, boolean mobilityConstraints, Set<Node> visited, List<Node> route) {
-        if (current.equals(end)) {
-            return true;
-        }
-        route.add(current);
-        visited.add(current);
 
-        // Traverses current hallway and its associated nodes
-        if (current.hallway != null){
-            for (Node neighbor : current.hallway.getNodes()) {
-                // if we reach an intersection and still need to traverse the next hallway, switch hallways
-                // need to fix if more than 2 hallways, but leave as is for now
-                if (current.hallway != end.hallway && current.positionAlongHallway == current.hallway.startIntersection.positionAlongHallway){
-                    current.hallway = end.hallway;
-                }
+        visited.add(current);
+        route.add(current);
+        if (current.equals(end)) return true;
+    
+        // Get all possible neighbors
+        List<Node> neighbors = new ArrayList<>();
+        
+        // 1. Nodes in current hallway
+        if (current.hallway != null) {
+            neighbors.addAll(current.hallway.getNodes());
+        }
+        
+        // 2. Connected nodes if current is intersection
+        if (current instanceof Intersection) {
+            neighbors.addAll(((Intersection) current).getConnectedNodes());
+        }
+    
+        for (Node neighbor : neighbors) {
+            if (!visited.contains(neighbor)) {
                 int timeCost = calculateTimeCost(current, neighbor);
-                if (!visited.contains(neighbor)) {
-                    if (remainingTime - timeCost >= 0) {
-                        if (mobilityConstraints && neighbor instanceof Stairs) {
-                            // Check if there is an elevator alternative
-                            continue;
-                        }
-                        if (dfs(neighbor, end, remainingTime - timeCost, mobilityConstraints, visited, route)) {
-                            return true;
-                        }
-                        remainingTime += timeCost;
+                
+                if (remainingTime - timeCost >= 0) {
+                    // Handle mobility constraints
+                    if (mobilityConstraints && (neighbor instanceof Stairs)) continue;
+                    
+                    if (dfs(neighbor, end, remainingTime - timeCost, mobilityConstraints, visited, route)) {
+                        return true;
                     }
                 }
-            }            
+            }
         }
-
-
-        // Backtrack
-        if (!route.isEmpty()){
-            route.remove(route.size() - 1);
-        }
-        visited.remove(current);
         
+        // Backtrack
+        route.remove(route.size() - 1);
+        visited.remove(current);
         return false;
     }
-
 
      /**
      * Calculates the time cost to move from one node to another.
@@ -113,6 +110,8 @@ public class CRF {
         for (Node node : route) {
             node.displayInfo();
         }
+        System.out.println("\nYou have arrived, Thanks for navigating with us");
+
     }
 
 }

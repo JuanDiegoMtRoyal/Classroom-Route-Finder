@@ -6,6 +6,6 @@ public class Elevator extends Node{
 
     @Override
     public void displayInfo() {
-        System.out.println("Elevator: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
+        System.out.println("Take Elevator: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
     }
 }

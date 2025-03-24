@@ -18,8 +18,15 @@ public class Intersection extends Node{
         return connectedNodes;
     }
 
-
     @Override
+    public void displayInfo() {
+        System.out.println("Once at Intersection: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
+      
+    }   
+
+
+
+    /*     @Override
     public void displayInfo() {
         System.out.println("Intersection: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
         System.out.println("Connected Nodes:");
@@ -27,5 +34,6 @@ public class Intersection extends Node{
             System.out.println("  - " + node.name);
         }
     }   
+        */
     
 }

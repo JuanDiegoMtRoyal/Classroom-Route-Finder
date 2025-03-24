@@ -9,7 +9,7 @@ public class Classroom extends Node{
     
         @Override
         public void displayInfo() {
-            System.out.println("Classroom: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
+            System.out.println("Go " + compassDirection + " towards Classroom: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
         }
     
 }

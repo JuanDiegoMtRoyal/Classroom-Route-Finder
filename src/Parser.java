@@ -98,11 +98,15 @@ public void initializeBuildingMap(String filename)
         //create hallway
         Intersection startIntersection = (Intersection) graph.getNode(startIntersectionName);
         if (startIntersection == null) {
-            System.err.println("Warning: Intersection " + startIntersectionName + " not found for hallway " + name);
+            startIntersection = new Intersection(startIntersectionName, null, 0, floor);
+            graph.addNode(startIntersection);
         }
         Hallway hallway = new Hallway(name, building, startIntersection, direction1, direction2, floor, length);
-        graph.addHallway(hallway);
 
+        startIntersection.hallway = hallway;
+        startIntersection.positionAlongHallway = 0;
+        hallway.addNode(startIntersection);
+        graph.addHallway(hallway);
     }
 
     private void parseClassroom(String line) {
@@ -140,8 +144,14 @@ public void initializeBuildingMap(String filename)
         String hallwayName = parts[2].trim();
         int position = Integer.parseInt(parts[3].trim());
         String compassDirection = parts[4].trim();
+
+        /* error 
         String teleportTo = parts[5].trim();
         int floor = Integer.parseInt(parts[6].trim());
+        */
+
+        int floorIndex = parts.length -1;
+        int floor = Integer.parseInt(parts[floorIndex].trim());
 
         // Find the hallway
         Hallway hallway = findHallwayByName(hallwayName);
@@ -164,8 +174,14 @@ public void initializeBuildingMap(String filename)
         String hallwayName = parts[2].trim();
         int position = Integer.parseInt(parts[3].trim());
         String compassDirection = parts[4].trim();
+
+        /*
         String teleportTo = parts[5].trim();
         int floor = Integer.parseInt(parts[6].trim());
+        */
+
+        int floorIndex = parts.length - 1;
+        int floor = Integer.parseInt(parts[floorIndex].trim());
 
         // Find the hallway
         Hallway hallway = findHallwayByName(hallwayName);
