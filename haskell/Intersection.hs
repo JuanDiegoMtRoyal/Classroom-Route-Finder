@@ -16,7 +16,7 @@ data Intersection = Intersection
       intersectionHallway :: Hallway,
       intersectionPositionAlongHallway :: Int,
       intersectionFloor :: Int
-	  intersectionConnectedNodes :: [Node]
+      intersectionConnectedNodes :: [Node]
     } deriving (Show)
 
 -- construtor
