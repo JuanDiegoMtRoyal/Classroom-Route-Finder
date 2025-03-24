@@ -10,14 +10,14 @@ module Hallway
 where
 
 data Hallway = Hallway
-    { name :: String,
-      building :: String,
-      startIntersection :: Intersection,
-      direction1 :: String,
-      direction2 :: String,
-      floor :: Int,
-      length :: Int,
-      nodes :: [Node]
+    { hallwayName :: String,
+      hallwayBuilding :: String,
+      hallwayStartIntersection :: Intersection,
+      hallwayDirection1 :: String,
+      hallwayDirection2 :: String,
+      hallwayFloor :: Int,
+      hallwayLength :: Int,
+      hallwayNodes :: [Node]
     ) deriving (Show)
 
 -- constructor
