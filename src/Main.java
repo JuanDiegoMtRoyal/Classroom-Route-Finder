@@ -8,10 +8,10 @@ public class Main {
             return;
         }
 
-        String startRoom = args[0]; // Starting classroom
-        String endRoom = args[1];   // Destination classroom
+        String startRoom = args[0].toUpperCase(); // Starting classroom
+        String endRoom = args[1].toUpperCase();   // Destination classroom
         int timeConstraint = Integer.parseInt(args[2]); // Time constraint in minutes 
-        boolean mobilityConstraints = Boolean.parseBoolean(args[3]); // Mobility constraints (true/false)
+        boolean mobilityConstraints = Boolean.parseBoolean(args[3].toUpperCase()); // Mobility constraints (true/false)
 
         System.out.println("user has entered SR,ER,TC,MC: " + startRoom + " " + endRoom + " " + timeConstraint + " " + mobilityConstraints);
 

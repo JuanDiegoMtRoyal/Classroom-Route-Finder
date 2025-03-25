@@ -65,18 +65,23 @@ public void initializeBuildingMap(String filename)
                 {
                     case "Hallway":
                     parseHallway(line);
+                    System.out.println("\n\n\n");
                     break;
                     case "Classroom":
                     parseClassroom(line);
+                    System.out.println("\n\n\n");
                     break;
                 case "Stairs":
                     parseStairs(line);
+                    System.out.println("\n\n\n");
                     break;
                 case "Elevator":
                     parseElevator(line);
+                    System.out.println("\n\n\n");
                     break;
                 case "Intersection":
                     parseIntersection(line);
+                    System.out.println("\n\n\n");
                     break;
                 default:
                 System.out.println("unknown section skipping line:" + line);
@@ -266,25 +271,49 @@ public void initializeBuildingMap(String filename)
  * @param 
  */
     private void parseIntersection(String line) {
-        String[] parts = line.split("[(),]");
-        if (parts.length < 2) {
-            System.err.println("Invalid intersection format: " + line);
-            return;
-        }
 
+        System.out.println("parsing intersection line: " + line);
+        String[] parts = line.split("[(),]");
+       
         String name = parts[0].trim();
         int floor = Integer.parseInt(parts[1].trim());
+        String hallwayName =  parts[2].trim();
+        int posOnHallway = Integer.parseInt(parts[3].trim());
 
-        // Create the intersection
-        Intersection intersection = new Intersection(name, null, 0, floor);
-        graph.addNode(intersection);
+        System.out.println("intersection info: name:"+name+" floor"+floor+" onhallway:"+hallwayName+" with position:"+posOnHallway);
 
-        // Add connected paths (hallways, stairs, elevators)
-        for (int i = 2; i < parts.length; i++) {
-            String connectedPath = parts[i].trim();
-            Node connectedNode = graph.getNode(connectedPath);
-            if (connectedNode != null) {
-                intersection.addConnectedNode(connectedNode);
+
+        Intersection intersection = (Intersection) graph.getNode(name);
+        if(intersection == null){
+            System.out.println("intersection: " + name + " did not exist so creating");
+            intersection = new Intersection(name, null, posOnHallway, floor); //for now exclude the hallway its on
+            graph.addNode(intersection);
+        }
+
+        for(int i = 3; i < parts.length; i++){
+            String item = parts[i].trim();
+
+            if(item.startsWith("hallway")){
+                System.out.println("adding a hallway connected path to intersection: " + intersection.name);
+                Hallway hallway = findHallwayByName(item);
+                if(hallway !=null){
+                    intersection.addHallway(hallway);
+                    System.out.println("intersection: " + intersection.name + "has added hallway: " + hallway.name);
+                    if(!hallway.getNodes().contains(intersection)){
+                        hallway.addNode(intersection);
+                        System.out.println("hallway: " + hallway.name + " has added node intersection: " + intersection.name);
+                    }
+                }
+            }
+
+            else{
+                System.out.println("adding a normal node connected path to intersection: " + intersection.name);
+                System.out.println("attempting to add: " + item);
+                Node node = graph.getNode(item);
+                if(node != null){
+                    intersection.addConnectedNode(node);
+                    System.out.println("added a: " + node.name + " to intersection: " + intersection.name);
+                }
             }
         }
     }
