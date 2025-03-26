@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Parser {
@@ -206,21 +208,19 @@ public void initializeBuildingMap(String filename)
         String hallwayName = parts[2].trim();
         int position = Integer.parseInt(parts[3].trim());
         String compassDirection = parts[4].trim();
-
-        /* error 
-        String teleportTo = parts[5].trim();
-        int floor = Integer.parseInt(parts[6].trim());
-        */
-
-        int floorIndex = parts.length -1;
-        int floor = Integer.parseInt(parts[floorIndex].trim());
+        int floor = Integer.parseInt(parts[parts.length - 1].trim());
 
         // Find the hallway
         Hallway hallway = findHallwayByName(hallwayName);
         if (hallway != null) {
             Stairs stairs = new Stairs(name, hallway, position, floor);
+
+            for (int i = 5; i < parts.length - 1; i++) {
+                stairs.addConnectedNodeName(parts[i].trim());
+            }
             graph.addNode(stairs);
             hallway.addNode(stairs);
+
         }
     }
 
@@ -290,7 +290,7 @@ public void initializeBuildingMap(String filename)
             graph.addNode(intersection);
         }
 
-        for(int i = 3; i < parts.length; i++){
+        for(int i = 4; i < parts.length; i++){
             String item = parts[i].trim();
 
             if(item.startsWith("hallway")){
@@ -316,6 +316,14 @@ public void initializeBuildingMap(String filename)
                 }
             }
         }
+        for (Hallway hallway : intersection.getConnectedHallways()) {
+        List<Node> hallwayNodes = hallway.getNodes();
+        if (!hallwayNodes.isEmpty()) {
+            // Connect to start and end of hallway
+            intersection.addConnectedNode(hallwayNodes.get(0));
+            intersection.addConnectedNode(hallwayNodes.get(hallwayNodes.size()-1));
+        }
+    }
     }
 
 
@@ -338,5 +346,18 @@ public void initializeBuildingMap(String filename)
         return null;
         
     }
+
+    public void resolveAllConnections() {
+        for (Node node : graph.getAllNodes()) {
+            if (node instanceof Stairs) {
+                ((Stairs) node).resolveConnections(graph);
+            }
+            if (node instanceof Elevator) {
+                ((Elevator) node).resolveConnections(graph);
+            }
+        }
+    }
+
+    
     
 }

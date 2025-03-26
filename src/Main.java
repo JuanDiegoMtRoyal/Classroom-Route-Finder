@@ -24,12 +24,25 @@ public class Main {
         System.out.println("beginning parse of txt file");
         parser.initializeBuildingMap("../data/bissetBuilding.txt");
 
+        System.out.println("\n=== GRAPH SUMMARY ===");
+System.out.println("Total nodes: " + graph.getAllNodes().size());
+System.out.println("Total hallways: " + graph.getHallways().size());
+
+        System.out.println("resolving connections...");
+        parser.resolveAllConnections(); 
+
+
         System.out.println("creating crf object");
         CRF crf = new CRF(graph);
+
+
+      
 
         System.out.println("searching for route....");
         List<Node> route = crf.findRoute(startRoom, endRoom, timeConstraint, mobilityConstraints);
         System.out.println("displaying route...");
         crf.displayRoute(route);
+        crf.printFullGraph();
+
     }
 }

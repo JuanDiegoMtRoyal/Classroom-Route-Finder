@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Hallway {
     String name;
@@ -26,9 +28,11 @@ public class Hallway {
         nodes.add(node);
     }
 
-    public List<Node> getNodes() {
-        return nodes;
-    }
+  public List<Node> getNodes() {
+    return nodes.stream()
+        .sorted(Comparator.comparingInt(n -> n.positionAlongHallway))
+        .collect(Collectors.toList());
+}
 
     public Intersection getStartIntersection() {
         return startIntersection;
