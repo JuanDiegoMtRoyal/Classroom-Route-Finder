@@ -11,24 +11,41 @@ where
 import Node (Node(..))
 import Hallway (Hallway(..))
 
+constructorIntersection :: Sring -> Int -> Int -> Intersection
+addHallway :: Intersection -> Hallway -> Intersection
+getConnectedHallways :: Intersection -> [Hallway]
+addConnectedNode :: Intersection -> Node -> Intersection
+getConnectedNode :: Intersection -> [Node]
+displayInfo :: Intersection -> IO()
+
 data Intersection = Intersection
     { intersectionName :: String,
+      intersectionIntersection :: Intersection,
       intersectionHallway :: Hallway,
       intersectionPositionAlongHallway :: Int,
       intersectionFloor :: Int
-      intersectionConnectedNodes :: [Node]
+	  intersectionConnectedHallways :: [Hallway]
+	  intersectionConnectedNodes :: [Node]
     } deriving (Show)
 
 -- construtor
-constructorIntersection :: Sring -> Hallway -> Int -> Int -> Intersection
-constructorIntersection name hallway positionAlongHallway floor
+constructorIntersection name positionAlongHallway floor = Intersection name position floor [] []
 
 -- functions
-addConnectedNode :: Node -> Intersection -> Intersection
-addConnectedNode node intersection = intersection { connectedNodes = node : connectedNodes intersection }
+addHallway intersection hallway = if hallway `elem` (intersectionConnectedHallways intersection)
+                                  then intersection
+                                  else intersection { intersectionConnectedHallways = hallway : (intersectionConnectedHallways intersection) }
 
-getConnectedNode :: Intersection -> [Node]
-getConnectedNode intersection = connectedNodes intersection
+getConnectedHallways intersection = intersectionConnectedHallways
 
-displayInfo :: Intersection -> IO()
-displayInfo intersection = putStrLn ("Classroom: " ++ intersectionName intersection ++ " at " ++ show (intersectionPositionAlongHallway intersection) ++ "m along " ++ hallwayName (intersectionHallway intersection))
+-- fix, helper function isIntersection
+addConnectedNode intersection node = if node `elem` intersectionConnectedNodes intersection -- || isIntersection node
+                                     then intersection
+                                     else intersection { intersectionConnectedNodes = node : (intersectionConnectedNodes intersection) }
+        where isIntersection :: Node -> Bool
+              isIntersection _ = False
+
+-- fix, might want to use a sorting function
+getConnectedNode intersection = intersectionConnectedNodes intersection
+
+displayInfo intersection = putStrLn ("-Arrive at Intersection: " ++ intersectionName intersection ++ " *From here: ")

@@ -5,12 +5,22 @@ module Hallway
     addNode,
     getNodes,
     getStartIntersection,
+    getAllIntersections,
+    addIntersection,
     getLength
 )
 where
 
 import Node (Node(..))
 import Intersection (Intersection(..))
+
+constructorHallway :: String -> String -> Intersection -> String -> String -> Int -> Int -> Hallway
+addNode :: Hallway -> Node -> Hallway
+getNodes :: Hallway -> [Node]
+getStartIntersection :: Hallway -> Intersection
+getAllIntersections :: Hallway -> [Intersection]
+addIntersection :: Hallway -> Intersection -> Hallway
+getLength :: Hallway -> Int
 
 data Hallway = Hallway
     { hallwayName :: String,
@@ -20,22 +30,23 @@ data Hallway = Hallway
       hallwayDirection2 :: String,
       hallwayFloor :: Int,
       hallwayLength :: Int,
-      hallwayNodes :: [Node]
+      hallwayNodes :: [Node],
+	  hallwayIntersections :: [Intersection]
     ) deriving (Show)
 
 -- constructor
-constructorHallway :: String -> String -> Intersection -> String -> String -> Int -> Int -> Hallway
-constructorHallway name building startIntersection direction1 direction2 floor length = Hallway name building startIntersection direction1 direction2 floor length []
+constructorHallway name building startIntersection direction1 direction2 floor length = Hallway name building startIntersection direction1 direction2 floor length [] []
 
 -- functions
-addNode :: Hallway -> Node -> Hallway
-addNode hallway node = hallway {nodeList = node : nodeList hallway }
+addNode hallway node = hallway { hallwayNodes = node : hallwayNodes hallway }
 
-getNodes :: Hallway -> [Node]
-getNodes hallway = nodeList hallway
+-- fix, might want to use sorting
+getNodes 
 
-getStartIntersection :: Hallway -> Intersection
-getStartIntersection hallway = startIntersection hallway
+getStartIntersection hallway = startIntersection
 
-getLength :: Hallway -> Int
-getLength hallway = length hallway
+getAllIntersections hallway -> hallwayIntersections
+
+addIntersection hallway intersection = hallway { hallwayIntersections = intersection : hallwayIntersections hallway }
+
+getLength hallway = hallwayLength
