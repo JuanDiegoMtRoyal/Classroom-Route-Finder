@@ -9,6 +9,9 @@ where
 import Node (Node(..))
 import Hallway (Hallway(..))
 
+constructorClassroom :: String -> String -> Hallway -> Int -> String -> Int
+displayInfo :: Classroom -> IO()
+
 data Classroom = Classroom
     { classroomName :: String
       classroomBuilding :: String
@@ -19,9 +22,7 @@ data Classroom = Classroom
     } deriving (Show)
 
 -- constructor
-constructorClassroom :: String -> String -> Hallway -> Int -> String -> Int
 constructorClassroom name building hallway positionAlongHallway compassDirection floor
 
 -- functions
-displayInfo :: Classroom -> IO()
 displayInfo classroom = putStrLn ("-Go " ++ classroomCompassDirection classroom ++ " towards classroom: " ++ classroomName classroom ++ " at " ++ show (classroomPositionAlongHallway classroom) ++ "m along " ++ hallwayName (classroomHallway classroom))

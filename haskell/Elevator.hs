@@ -12,6 +12,12 @@ where
 import Node (Node(..))
 import Hallway (Hallway(..))
 
+constructorElevator :: String -> Hallway -> Int -> Int -> Elevator
+addConnectedNodeName :: Elevator -> String -> Elevator
+resolveConnections :: Elevator -> Graph -> Elevator
+getConnectedNodes :: Elevator -> [Node]
+displayInfo :: Elevator -> IO()
+
 data Elevator = Elevator
     { elevatorName :: String,
       elevatorHallway :: Hallway,
@@ -22,18 +28,13 @@ data Elevator = Elevator
     } deriving (Show)
 
 -- constructor
-constructorElevator :: String -> Hallway -> Int -> Int -> Elevator
 constrcutorElevator name hallway positionAlongHallway floor
 
 -- functions
-addConnectedNodeName :: Elevator -> String -> Elevator
 addConnectedNodeName elevator nodeName = 
 
-resolveConnections :: Elevator -> Graph -> Elevator
 resolveConnections 
 
-getConnectedNodes :: Elevator -> [Node]
 getConnectedNodes elevator = elevator 
 
-displayInfo :: Elevator -> IO()
 displayInfo elevator = putStrLn ("Elevator: " ++ elevatorName elevator ++ " at " ++ show (elevatorPositionAlongHallway elevator) ++ "m along " ++ hallwayName (elevatorHallway elevator))
