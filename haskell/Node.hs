@@ -18,8 +18,8 @@ data Node = Node
     } deriving (Show)
 
 -- constructor
-createNode :: String -> Intersection -> Hallway -> Int -> Floor -> Node
-createNode name intersection hallway positionAlongHallway floor
+constructorNode :: String -> Intersection -> Hallway -> Int -> Floor -> Node
+constructorNode name intersection hallway positionAlongHallway floor
 
 -- compares the name of 2 nodes => returns true if the same, else false
 equals :: Node -> Node -> Bool
