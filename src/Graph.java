@@ -11,11 +11,6 @@ public class Graph {
         intersections = new ArrayList<>();
     }
 
-    /**
-     * A getter function
-     * 
-     * @return
-     */
     public Collection<Node> getAllNodes() {
         return nodes.values();
     }
@@ -24,13 +19,6 @@ public class Graph {
         nodes.put(node.name, node);
     }
 
-    /**
-     * @brief
-     *
-     * 
-     *
-     * @param
-     */
     public void addHallway(Hallway hallway) {
         hallways.add(hallway);
     }

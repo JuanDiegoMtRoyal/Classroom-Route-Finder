@@ -6,15 +6,16 @@ import java.util.stream.Collectors;
 public class Hallway {
     String name;
     String building;
-    Intersection startIntersection; //the intersection where the hallway starts
-    String direction1; //direction of the hallway
-    String direction2; //opposite direction of the hallway
+    Intersection startIntersection; // the intersection where the hallway starts
+    String direction1; // direction of the hallway
+    String direction2; // opposite direction of the hallway
     int floor;
-    int length; //length of hallway in meters
-    List<Node> nodes; //nodes along the hallway (classroom,stairs,elevator,intersections)
+    int length; // length of hallway in meters
+    List<Node> nodes; // nodes along the hallway (classroom,stairs,elevator,intersections)
     List<Intersection> intersections;
 
-    public Hallway(String name, String building, Intersection startIntersection, String direction1, String direction2, int floor, int length) {
+    public Hallway(String name, String building, Intersection startIntersection, String direction1, String direction2,
+            int floor, int length) {
         this.name = name;
         this.building = building;
         this.startIntersection = startIntersection;
@@ -26,15 +27,15 @@ public class Hallway {
         this.intersections = new ArrayList<>();
     }
 
-       public void addNode(Node node) {
+    public void addNode(Node node) {
         nodes.add(node);
     }
 
-  public List<Node> getNodes() {
-    return nodes.stream()
-        .sorted(Comparator.comparingInt(n -> n.positionAlongHallway))
-        .collect(Collectors.toList());
-}
+    public List<Node> getNodes() {
+        return nodes.stream()
+                .sorted(Comparator.comparingInt(n -> n.positionAlongHallway))
+                .collect(Collectors.toList());
+    }
 
     public Intersection getStartIntersection() {
         return startIntersection;
@@ -52,6 +53,4 @@ public class Hallway {
         return length;
     }
 
-
-    
 }

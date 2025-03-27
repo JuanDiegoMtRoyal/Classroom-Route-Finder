@@ -14,7 +14,6 @@ public class Intersection extends Node {
 
     }
 
-    // Hallway connections
     public void addHallway(Hallway hallway) {
         if (!connectedHallways.contains(hallway)) {
             connectedHallways.add(hallway);
@@ -25,7 +24,7 @@ public class Intersection extends Node {
         return connectedHallways;
     }
 
-    // Other node connections (stairs, elevators)
+    // Other node connections (stairs, elevators, prev/next classroom)
     public void addConnectedNode(Node node) {
         if (!connectedNodes.contains(node) && !(node instanceof Intersection)) {
             connectedNodes.add(node);
@@ -43,4 +42,3 @@ public class Intersection extends Node {
         System.out.println("\n-Arrive at Intersection: " + name + "\n*From here: ");
     }
 }
-
