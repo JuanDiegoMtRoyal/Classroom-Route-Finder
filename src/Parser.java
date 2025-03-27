@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
@@ -10,11 +9,12 @@ public class Parser {
     }
 
     /**
-     * @brief
+     * @brief initializes all the objects specified in the input txt
      *
-     *        Insert indepth
+     *        Goes line by line and checks what type of object the current line
+     *        represents, then parses that line.
      *
-     * @param
+     * @param filename a txt file containing all the information of the building
      */
     public void initializeBuildingMap(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -149,11 +149,13 @@ public class Parser {
     }
 
     /**
-     * @brief
+     * @brief Parses the parameters of stairs in input txt file
      *
-     *        Insert indepth
+     *        Creates the stairs object and for every connected node, it adds
+     *        only the name as the object might not exist yet.
      *
-     * @param
+     * @param line the string containing all the information of the stairs in the
+     *             input file
      */
     private void parseStairs(String line) {
         String[] parts = line.split("[(),]");
@@ -179,11 +181,13 @@ public class Parser {
     }
 
     /**
-     * @brief
+     * @brief Parses the parameters of an elevator in input txt file
      *
-     *        Insert indepth
+     *        Creates the elevator object and for every connected node, it adds
+     *        only the name as the object might not exist yet.
      *
-     * @param
+     * @param line the string containing all the information of the elevator in the
+     *             input file
      */
     private void parseElevator(String line) {
         String[] parts = line.split("[(),]");
@@ -207,6 +211,20 @@ public class Parser {
         }
         graph.addNode(elevator);
     }
+
+    /**
+     * @brief Parses the parameters of an intersection in the input txt file
+     *
+     *        The intersection is created and its connected nodes such as stairs and
+     *        elevators are connected to
+     *        it as well as hallways the intersection connects or is on. The
+     *        intersection also connectes to previous
+     *        and next nodes in a hallway based on their index in the hallway, this
+     *        is important for switching hallways.
+     * 
+     * @param line the string containing all the information of the intersection in
+     *             the input file
+     */
 
     private void parseIntersection(String line) {
         String[] parts = line.split("[(),]");
@@ -296,16 +314,15 @@ public class Parser {
 
     }
 
-    private Intersection findIntersectionByName(String name) {
-        for (Intersection intersection : graph.getIntersections()) {
-
-            if (intersection.name.equals(name)) {
-                return intersection;
-            }
-        }
-        return null;
-
-    }
+    /**
+     * @brief calls the method of stairs and elevator objects to fix their connected
+     *        nodes that were added before those nodes existed
+     * 
+     *        Iterates through all the nodes in the graph and resolves the
+     *        connections between stairs and elevators on different floors as
+     *        each stair on a different floor is a different node in this project,
+     *        so they must be linked as well as to their respective intersections.
+     */
 
     public void resolveAllConnections() {
         for (Node node : graph.getAllNodes()) {
