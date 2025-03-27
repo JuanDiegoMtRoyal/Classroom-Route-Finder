@@ -11,6 +11,7 @@ where
 
 import Node (Node(..))
 import Hallway (Hallway(..))
+import Intersection (Intersection(..))
 
 constructorElevator :: String -> Hallway -> Int -> Int -> Elevator
 addConnectedNodeName :: Elevator -> String -> Elevator
@@ -20,6 +21,7 @@ displayInfo :: Elevator -> IO()
 
 data Elevator = Elevator
     { elevatorName :: String,
+      elevatorIntersection :: Intersection,
       elevatorHallway :: Hallway,
       elevatorPositionAlongHallway :: Int,
       elevatorFloor :: Int,

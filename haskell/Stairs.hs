@@ -10,6 +10,8 @@ module Stairs
 where
 
 import Node (Node(..))
+import Hallway (Hallway(..))
+import intersection (intersection(..))
 
 constructorStairs :: String -> Int -> Int -> Stairs
 addConnectedNodeName :: String -> [String] -> [String]
@@ -19,6 +21,8 @@ displayInfo :: Stairs -> IO()
 
 data Stairs = Stairs
     { stairsName :: String,
+      stairsIntersection :: intersection,
+	  stairsHallway :: Hallway,
       stairsPositionAlongHallway :: Int,
       stairsFloor :: Int
       stairsConnectedNodes :: [Node]

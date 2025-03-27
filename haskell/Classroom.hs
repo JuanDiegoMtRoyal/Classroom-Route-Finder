@@ -8,17 +8,19 @@ where
 
 import Node (Node(..))
 import Hallway (Hallway(..))
+import Intersection (Intersection(..))
 
 constructorClassroom :: String -> String -> Hallway -> Int -> String -> Int
 displayInfo :: Classroom -> IO()
 
 data Classroom = Classroom
     { classroomName :: String
-      classroomBuilding :: String
+      classroomIntersection :: Intersection,
       classroomHallway :: Hallway
       classroomPositionAlongHallway :: Int
-      classroomCompassDirection :: String
       classroomFloor :: Int
+      classroomBuilding :: String
+      classroomCompassDirection :: String
     } deriving (Show)
 
 -- constructor
