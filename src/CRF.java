@@ -44,8 +44,8 @@ public class CRF {
         }
     }
 
-   
-    /* takes forever to execute, unoptimized*/
+
+
 
     private boolean dfs(Node current, Node end, int remainingTime, boolean mobilityConstraints, Set<Node> visited,
             List<Node> route) {
@@ -55,51 +55,92 @@ public class CRF {
         if (current.equals(end))
             return true;
 
-        // Get all possible neighbors
         List<Node> neighbors = new ArrayList<>();
 
-        // 1. Nodes in current hallway
-        if (current.hallway != null) {
-            neighbors.addAll(current.hallway.getNodes());
+        // 1. Nodes in current hallway: Add adjacent nodes
+        if (current.hallway != null && !(current instanceof Intersection) 
+        && !(current instanceof Stairs) && !(current instanceof Elevator)) {
+    List<Node> hallwayNodes = current.hallway.getNodes();
+    int currentIndex = hallwayNodes.indexOf(current);
+    
+    if (currentIndex != -1) {
+        // Add previous node
+        if (currentIndex > 0) {
+            Node prevNode = hallwayNodes.get(currentIndex - 1);
+            neighbors.add(prevNode);
         }
-
-        // 2. Connected nodes if current is intersection
-        if (current instanceof Intersection) {
-            neighbors.addAll(((Intersection) current).getConnectedNodes());
+        // Add next node
+        if (currentIndex < hallwayNodes.size() - 1) {
+            Node nextNode = hallwayNodes.get(currentIndex + 1);
+            neighbors.add(nextNode);
         }
+    }
+}
 
-        if (current instanceof Stairs) {
-            neighbors.addAll(((Stairs) current).getConnectedNodes());
-        } else if (current instanceof Elevator) {
-            neighbors.addAll(((Elevator) current).getConnectedNodes());
-        }
 
-        for (Node neighbor : neighbors) {
-            if (!visited.contains(neighbor)) {
-                int timeCost = calculateTimeCost(current, neighbor);
-
-                if (remainingTime - timeCost >= 0) {
-                    if (mobilityConstraints) {
-                        if (neighbor instanceof Stairs || current instanceof Stairs) {
-                            continue;
-                        }
-                    }
-                }
-
-                if (dfs(neighbor, end, remainingTime - timeCost, mobilityConstraints, visited, route)) {
-                    return true;
+    if (current instanceof Intersection) {
+        for (Node node : ((Intersection) current).getConnectedNodes()) {
+            // Same floor: exclude stairs/elevators
+            if (current.floor == end.floor){
+                if(!(node instanceof Stairs || node instanceof Elevator))
+                {
+                    neighbors.add(node);
                 }
             }
 
+            else{
+                if ((mobilityConstraints && node instanceof Elevator) || (!mobilityConstraints && node instanceof Stairs)) {
+                    neighbors.add(node);
+            }
+            }
         }
-        // back track
-        route.remove(route.size() - 1);
-        visited.remove(current);
-        return false;
+    
+            }
 
+
+          if (current instanceof Stairs || current instanceof Elevator) {
+        
+        // Same floor: exit to connected intersection
+        if (current.floor == end.floor) {
+            if (current.intersection != null) {
+                neighbors.add(current.intersection);
+            }
+        }
+        // Different floor: handle connections
+        else {
+            List<Node> transportNodes = (current instanceof Stairs) 
+                ? ((Stairs) current).getConnectedNodes() 
+                : ((Elevator) current).getConnectedNodes();
+            
+            for (Node node : transportNodes) {
+                if ((node instanceof Stairs || node instanceof Elevator) && 
+                    node.floor != current.floor) {
+                    neighbors.add(node);
+                }
+            }
+        }
     }
 
     
+ // 4. Explore neighbors
+ for (Node neighbor : neighbors) {
+    if (!visited.contains(neighbor)) {
+        int timeCost = calculateTimeCost(current, neighbor);
+        
+        if (remainingTime - timeCost >= 0) {
+
+            if (dfs(neighbor, end, remainingTime - timeCost, mobilityConstraints, visited, route)) {
+                return true;
+            }
+        } 
+    }
+}
+
+// Backtrack
+route.remove(route.size() - 1);
+visited.remove(current);
+return false;
+}
 
      /**
      * Calculates the time cost to move from one node to another.
@@ -117,6 +158,13 @@ public class CRF {
              {
                 return 30; 
              }
+
+             if((from instanceof Stairs || from instanceof Elevator || from instanceof Intersection) && 
+             (to instanceof Stairs|| to instanceof Elevator || to instanceof Intersection) &&
+             from.floor == to.floor)
+             {
+                return 0; 
+             }
         // Calculate the time cost based on the distance between nodes
         return Math.abs(to.positionAlongHallway - from.positionAlongHallway);
     }
@@ -131,62 +179,22 @@ public class CRF {
             System.out.println("No route found.");
             return;
         }
-
-        System.out.println("Route Directions:");
-        for (Node node : route) {
-            node.displayInfo();
-        }
-        System.out.println("\nYou have arrived, Thanks for navigating with us");
-
-    }
-
-
-
-
-
-    //ai stuff
-public void printFullGraph() {
-    System.out.println("\n=== FULL GRAPH STRUCTURE ===");
     
-    // Group nodes by floor
-    Map<Integer, List<Node>> nodesByFloor = graph.getAllNodes().stream()
-        .collect(Collectors.groupingBy(n -> n.floor));
-
-    nodesByFloor.forEach((floor, nodes) -> {
-        System.out.println("\nFloor " + floor + ":");
-        
-        nodes.forEach(node -> {
-            System.out.println("\n" + node.name + " (" + node.getClass().getSimpleName() + ")");
-            System.out.println("  Hallway: " + (node.hallway != null ? node.hallway.name : "N/A"));
-            System.out.println("  Position: " + node.positionAlongHallway + "m");
-            
-            if (node instanceof Intersection) {
-                Intersection i = (Intersection) node;
-                System.out.println("  Connected Hallways: " + 
-                    i.getConnectedHallways().stream()
-                        .map(h -> h.name)
-                        .collect(Collectors.joining(", ")));
-                System.out.println("  Connected Nodes: " + 
-                    i.getConnectedNodes().stream()
-                        .map(n -> n.name)
-                        .collect(Collectors.joining(", ")));
+        System.out.println("\n\t\tRoute Directions:\n");
+        int totalTimeSeconds = 0;
+    
+        for (int i = 0; i < route.size(); i++) {
+            Node current = route.get(i);
+            current.displayInfo();
+    
+            if (i < route.size() - 1) {
+                Node next = route.get(i + 1);
+                totalTimeSeconds += calculateTimeCost(current, next);
             }
-            
-            if (node instanceof Stairs) {
-                System.out.println("  Connects to: " + 
-                    ((Stairs) node).getConnectedNodes().stream()
-                        .map(n -> n.name + " (F" + n.floor + ")")
-                        .collect(Collectors.joining(", ")));
-            }
-            
-            if (node instanceof Elevator) {
-                System.out.println("  Connects to: " + 
-                    ((Elevator) node).getConnectedNodes().stream()
-                        .map(n -> n.name + " (F" + n.floor + ")")
-                        .collect(Collectors.joining(", ")));
-            }
-        });
-    });
-}
-
+        }
+    
+        int minutes = totalTimeSeconds / 60;
+        int seconds = totalTimeSeconds % 60;
+        System.out.println("\nYou have arrived. Total time taken: " + minutes + " minutes and " + seconds + " seconds.");
+    }
 }

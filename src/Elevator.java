@@ -5,8 +5,8 @@ public class Elevator extends Node{
     private List<Node> connectedNodes;
     private List<String> connectedNodeNames;
     
-    public Elevator(String name, Hallway hallway, int positionAlongHallway, int floor) {
-        super(name, hallway, positionAlongHallway, floor);
+    public Elevator(String name, int positionAlongHallway, int floor) {
+        super(name, null, null, positionAlongHallway, floor);
         this.connectedNodes = new ArrayList<>();
         this.connectedNodeNames = new ArrayList<>();
     }
@@ -22,6 +22,10 @@ public class Elevator extends Node{
                 connectedNodes.add(node);
                 ((Elevator) node).connectedNodes.add(this);
             }
+            else if(node instanceof Intersection) {
+                connectedNodes.add(node);
+               ((Intersection) node).addConnectedNode(this);
+        }
         }
     }
 
@@ -32,6 +36,6 @@ public class Elevator extends Node{
 
     @Override
     public void displayInfo() {
-        System.out.println("Take Elevator: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
+        System.out.println("-Take Elevator: " + name + " at intersection: " + intersection.name);
     }
 }

@@ -1,18 +1,17 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Intersection extends Node {
-    private List<Hallway> connectedHallways;  // Tracks all connected hallways
-    private List<Node> connectedNodes;        // Other connections (stairs, elevators)
+    private List<Hallway> connectedHallways; // Tracks all connected hallways
+    private List<Node> connectedNodes; // Other connections (stairs, elevators)
 
-    public Intersection(String name, Hallway primaryHallway, int positionAlongHallway, int floor) {
-        super(name, primaryHallway, positionAlongHallway, floor);
+    public Intersection(String name, int positionAlongHallway, int floor) {
+        super(name, null, null, positionAlongHallway, floor);
         this.connectedHallways = new ArrayList<>();
         this.connectedNodes = new ArrayList<>();
-        
-        if (primaryHallway != null) {
-            this.connectedHallways.add(primaryHallway);
-        }
+
     }
 
     // Hallway connections
@@ -28,52 +27,20 @@ public class Intersection extends Node {
 
     // Other node connections (stairs, elevators)
     public void addConnectedNode(Node node) {
-        if (!connectedNodes.contains(node)) {
+        if (!connectedNodes.contains(node) && !(node instanceof Intersection)) {
             connectedNodes.add(node);
         }
     }
 
     public List<Node> getConnectedNodes() {
-        return connectedNodes;
+        return connectedNodes.stream()
+                .sorted(Comparator.comparingInt(n -> n.positionAlongHallway))
+                .collect(Collectors.toList());
     }
 
     @Override
     public void displayInfo() {
-        System.out.println("Intersection: " + name + " at " + positionAlongHallway + "m along " + 
-                          (hallway != null ? hallway.name : "no assigned hallway"));
-        
-        System.out.println("Connected Hallways:");
-        for (Hallway h : connectedHallways) {
-            System.out.println("  - " + h.name);
-        }
-        
-        System.out.println("Connected Nodes:");
-        for (Node n : connectedNodes) {
-            System.out.println("  - " + n.name);
-        }
+        System.out.println("\n-Arrive at Intersection: " + name + "\n*From here: ");
     }
 }
-/*
 
-    @Override
-    public void displayInfo() {
-        System.out.println("Once at Intersection: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
-      
-    }  
-        
-    */
-
-
-
-    /*     @Override
-    public void displayInfo() {
-        System.out.println("Intersection: " + name + " at " + positionAlongHallway + "m along " + hallway.name);
-        System.out.println("Connected Nodes:");
-        for (Node node : connectedNodes) {
-            System.out.println("  - " + node.name);
-        }
-    }   
-        
-    
-}
-*/

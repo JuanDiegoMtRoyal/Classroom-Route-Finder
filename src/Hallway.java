@@ -12,6 +12,7 @@ public class Hallway {
     int floor;
     int length; //length of hallway in meters
     List<Node> nodes; //nodes along the hallway (classroom,stairs,elevator,intersections)
+    List<Intersection> intersections;
 
     public Hallway(String name, String building, Intersection startIntersection, String direction1, String direction2, int floor, int length) {
         this.name = name;
@@ -22,6 +23,7 @@ public class Hallway {
         this.floor = floor;
         this.length = length;
         this.nodes = new ArrayList<>();
+        this.intersections = new ArrayList<>();
     }
 
        public void addNode(Node node) {
@@ -36,6 +38,14 @@ public class Hallway {
 
     public Intersection getStartIntersection() {
         return startIntersection;
+    }
+
+    public List<Intersection> getAllIntersections() {
+        return intersections;
+    }
+
+    public void addIntersection(Intersection intersection) {
+        intersections.add(intersection);
     }
 
     public int getLength() {
