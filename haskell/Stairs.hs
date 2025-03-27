@@ -2,29 +2,38 @@ module Stairs
 (
     Stairs,
 
-    addConnectedFloor,
+    addConnectedNodeName,
+    resolveConnections,
+    getConnectedNodes,
     displayInfo
 )
 where
 
 import Node (Node(..))
-import Hallway (Hallway(..))
+
+constructorStairs :: String -> Int -> Int -> Stairs
+addConnectedNodeName :: String -> [String] -> [String]
+resolveConnections :: Graph -> [Node] -> [Node]
+getConnectedNodes :: [Node]
+displayInfo :: Stairs -> IO()
 
 data Stairs = Stairs
-    { stairName :: String,
-      stairHallway :: Hallway,
-      stairPositionAlongHallway :: Int,
-      stairFloor :: Int
-      stairsConnectedFloors :: [String]
+    { stairsName :: String,
+      stairsPositionAlongHallway :: Int,
+      stairsFloor :: Int
+      stairsConnectedNodes :: [Node]
+      stairsConnectedNodeNames :: [String]
     } deriving (Show)
 
 -- constructor
-constructorStairs :: String -> Hallway -> Int -> Int -> Stairs
 constructorStairs name hallway positionAlongHallway floor
 
 -- functions
-addConnectedFloor :: String -> [String] -> [String]
-addConnectedFloor name connectedFloors = name : connectedFloors
+addConnectedNodeName nodeName connectedNodeNames = nodeName : connectedNodeNames
 
-displayInfo :: Stairs -> IO()
-displayInfo stairs = putStrLn ("Stairs: " ++ stairName stairs ++ " at " ++ show (stairPositionAlongHallway stairs) ++ "m along " ++ hallwayName (stairHallway stairs))
+-- fix
+resolveConnections graph = 
+
+getConnectedNodes connectedNodes = connectedNodes
+
+displayInfo stairs = putStrLn ("- Take stairs: " ++ stairName stairs ++ " at intersection: " ++ show (stairPositionAlongHallway stairs))
