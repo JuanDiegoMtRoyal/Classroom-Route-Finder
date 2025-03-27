@@ -24,4 +24,4 @@ constructorClassroom name building hallway positionAlongHallway compassDirection
 
 -- functions
 displayInfo :: Classroom -> IO()
-displayInfo classroom = putStrLn ("Classroom: " ++ classroomName classroom ++ " at " ++ show (classroomPositionAlongHallway classroom) ++ "m along " ++ hallwayName (classroomHallway classroom))
+displayInfo classroom = putStrLn ("-Go " ++ classroomCompassDirection classroom ++ " towards classroom: " ++ classroomName classroom ++ " at " ++ show (classroomPositionAlongHallway classroom) ++ "m along " ++ hallwayName (classroomHallway classroom))
