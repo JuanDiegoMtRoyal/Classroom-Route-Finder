@@ -23,9 +23,9 @@ data Node = Node
     } deriving (Show)
 
 -- constructor
-constructorNode name intersection hallway positionAlongHallway floor
+constructorNode name intersection hallway positionAlongHallway floor = Node name intersection hallway positionAlongHallway floor
 
 -- compares the name of 2 nodes => returns true if the same, else false
-equals (Node name1 _ _ _) (Node name2 _ _ _) = name1 == name2
+equals node1 node2 = nodeName node1 == nodeName node2
 
 displayInfo node = putStrLn ("Node Info:\nName: " ++ (nodeName node) ++ " Hallway: " ++ (nodeHallway node) ++ " nodePositionAlongHallway node) ++ " Floor: " ++ (nodeFloor node))
