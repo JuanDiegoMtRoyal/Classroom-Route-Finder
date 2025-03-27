@@ -20,8 +20,8 @@ data Intersection = Intersection
     } deriving (Show)
 
 -- construtor
-createIntersection :: Sring -> Hallway -> Int -> Int -> Intersection
-createIntersection name hallway positionAlongHallway floor
+constructorIntersection :: Sring -> Hallway -> Int -> Int -> Intersection
+constructorIntersection name hallway positionAlongHallway floor
 
 -- functions
 addConnectedNode :: Node -> Intersection -> Intersection

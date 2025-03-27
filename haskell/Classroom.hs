@@ -19,8 +19,8 @@ data Classroom = Classroom
     } deriving (Show)
 
 -- constructor
-createClassroom :: String -> String -> Hallway -> Int -> String -> Int
-createClassroom name building hallway positionAlongHallway compassDirection floor
+constructorClassroom :: String -> String -> Hallway -> Int -> String -> Int
+constructorClassroom name building hallway positionAlongHallway compassDirection floor
 
 -- functions
 displayInfo :: Classroom -> IO()

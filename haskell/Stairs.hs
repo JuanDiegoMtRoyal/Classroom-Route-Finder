@@ -19,8 +19,8 @@ data Stairs = Stairs
     } deriving (Show)
 
 -- constructor
-createStairs :: String -> Hallway -> Int -> Int -> Stairs
-createStairs name hallway positionAlongHallway floor
+constructorStairs :: String -> Hallway -> Int -> Int -> Stairs
+constructorStairs name hallway positionAlongHallway floor
 
 -- functions
 addConnectedFloor :: String -> [String] -> [String]

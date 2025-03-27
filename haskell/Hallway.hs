@@ -24,8 +24,8 @@ data Hallway = Hallway
     ) deriving (Show)
 
 -- constructor
-createHallway :: String -> String -> Intersection -> String -> String -> Int -> Int -> Hallway
-createHallway name building startIntersection direction1 direction2 floor length = Hallway name building startIntersection direction1 direction2 floor length []
+constructorHallway :: String -> String -> Intersection -> String -> String -> Int -> Int -> Hallway
+constructorHallway name building startIntersection direction1 direction2 floor length = Hallway name building startIntersection direction1 direction2 floor length []
 
 -- functions
 addNode :: Hallway -> Node -> Hallway
