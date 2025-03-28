@@ -14,12 +14,12 @@ constructorClassroom :: String -> String -> Hallway -> Int -> String -> Int -> C
 displayInfo :: Classroom -> IO()
 
 data Classroom = Classroom
-    { classroomName :: String
+    { classroomName :: String,
       classroomIntersection :: Intersection,
-      classroomHallway :: Hallway
-      classroomPositionAlongHallway :: Int
-      classroomFloor :: Int
-      classroomBuilding :: String
+      classroomHallway :: Hallway,
+      classroomPositionAlongHallway :: Int,
+      classroomFloor :: Int,
+      classroomBuilding :: String,
       classroomCompassDirection :: String
     } deriving (Show)
 
