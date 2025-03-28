@@ -38,15 +38,15 @@ data Hallway = Hallway
 constructorHallway name building startIntersection direction1 direction2 floor length = Hallway name building startIntersection direction1 direction2 floor length [] []
 
 -- functions
-addNode hallway node = hallway { hallwayNodes = node : hallwayNodes hallway }
+addNode hallway node = hallway { hallwayNodes = node : (hallwayNodes hallway) }
 
 -- fix, might want to use sorting
 getNodes 
 
-getStartIntersection hallway = startIntersection
+getStartIntersection hallway = startIntersection hallway
 
-getAllIntersections hallway -> hallwayIntersections
+getAllIntersections hallway = hallwayIntersections hallway
 
-addIntersection hallway intersection = hallway { hallwayIntersections = intersection : hallwayIntersections hallway }
+addIntersection hallway intersection = hallway { hallwayIntersections = intersection : (hallwayIntersections hallway) }
 
-getLength hallway = hallwayLength
+getLength hallway = hallwayLength hallway
