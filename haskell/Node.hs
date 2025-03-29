@@ -10,7 +10,7 @@ where
 import Hallway (Hallway(..))
 import Intersection (Intersection(..))
 
-constructorNode :: String -> Intersection -> Hallway -> Int -> Floor -> Node
+constructorNode :: String -> Intersection -> Hallway -> Int -> Int -> Node
 equals :: Node -> Node -> Bool
 displayInfo :: Node -> IO()
 
