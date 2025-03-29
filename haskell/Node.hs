@@ -28,4 +28,4 @@ constructorNode name intersection hallway positionAlongHallway floor = Node name
 -- compares the name of 2 nodes => returns true if the same, else false
 equals node1 node2 = nodeName node1 == nodeName node2
 
-displayInfo node = putStrLn ("Node Info:\nName: " ++ (nodeName node) ++ " Hallway: " ++ (nodeHallway node) ++ " nodePositionAlongHallway node) ++ " Floor: " ++ (nodeFloor node))
+displayInfo node = putStrLn ("Node Info:\nName: " ++ (nodeName node) ++ " Hallway: " ++ (nodeHallway node) ++ " Hallway Position: " ++ ( nodePositionAlongHallway node) ++ " Floor: " ++ (nodeFloor node))
