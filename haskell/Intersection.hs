@@ -1,51 +1,53 @@
 module Intersection
 (
     Intersection,
-    
+    constructorIntersection,
+    addHallway,
+    getConnectedHallways,
     addConnectedNode,
     getConnectedNode,
-    displayInfo
+    intersectionDisplayInfo
 )
 where
 
 import Node (Node(..))
 import Hallway (Hallway(..))
+import Data.List (sortOn)
 
-constructorIntersection :: Sring -> Int -> Int -> Intersection
+constructorIntersection :: String -> Int -> Int -> Intersection
 addHallway :: Intersection -> Hallway -> Intersection
 getConnectedHallways :: Intersection -> [Hallway]
 addConnectedNode :: Intersection -> Node -> Intersection
 getConnectedNode :: Intersection -> [Node]
-displayInfo :: Intersection -> IO()
+intersectionDisplayInfo :: Intersection -> IO()
 
 data Intersection = Intersection
     { intersectionName :: String,
-      intersectionIntersection :: Intersection,
-      intersectionHallway :: Hallway,
+      intersectionIntersection :: Maybe Intersection,
+      intersectionHallway :: Maybe Hallway,
       intersectionPositionAlongHallway :: Int,
-      intersectionFloor :: Int
-	  intersectionConnectedHallways :: [Hallway]
-	  intersectionConnectedNodes :: [Node]
+      intersectionFloor :: Int,
+      intersectionConnectedHallways :: [Hallway],
+      intersectionConnectedNodes :: [Node]
     } deriving (Show)
 
 -- construtor
-constructorIntersection name positionAlongHallway floor = Intersection name position floor [] []
+constructorIntersection name positionAlongHallway floor = Intersection name Nothing Nothing positionAlongHallway floor [] []
 
 -- functions
 addHallway intersection hallway = if hallway `elem` (intersectionConnectedHallways intersection)
                                   then intersection
                                   else intersection { intersectionConnectedHallways = hallway : (intersectionConnectedHallways intersection) }
 
-getConnectedHallways intersection = intersectionConnectedHallways
+getConnectedHallways intersection = intersectionConnectedHallways intersection
 
 -- fix, helper function isIntersection
-addConnectedNode intersection node = if node `elem` intersectionConnectedNodes intersection -- || isIntersection node
+addConnectedNode intersection node = if node `elem` (intersectionConnectedNodes intersection) -- || isIntersection node
                                      then intersection
                                      else intersection { intersectionConnectedNodes = node : (intersectionConnectedNodes intersection) }
         where isIntersection :: Node -> Bool
               isIntersection _ = False
 
--- fix, might want to use a sorting function
-getConnectedNode intersection = intersectionConnectedNodes intersection
+getConnectedNode intersection = sortOn nodePositionAlongHallway (intersectionConnectedNodes intersection)
 
-displayInfo intersection = putStrLn ("-Arrive at Intersection: " ++ intersectionName intersection ++ " *From here: ")
+intersectionDisplayInfo intersection = putStrLn ("-Arrive at Intersection: " ++ intersectionName intersection ++ " *From here: ")
