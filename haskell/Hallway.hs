@@ -41,8 +41,6 @@ data Hallway = Hallway
 constructorHallway name building startIntersection direction1 direction2 floor length = Hallway name building startIntersection direction1 direction2 floor length [] []
 
 -- functions
--- NOTE: if using addNode, to test must use "it" as a reference to the current list
---       when you are running in main program, use a let call.
 addNode hallway node = hallway { hallwayNodes = node : (hallwayNodes hallway) }
 
 getNodes hallway = sortOn nodePositionAlongHallway (hallwayNodes hallway)
