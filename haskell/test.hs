@@ -113,12 +113,12 @@ testHallwayGetLength = do
     let length = hallwayGetLength hallwayB
     putStrLn ("Length of hallwayB is: \n" ++ show(length))
 
--- WORKS: addNode
--- WORKS: getNodes
--- WORKS: getStartIntersection
--- WORKS: getAllIntersections
--- WORKS: addIntersection
--- WORKS: getLength
+-- WORKS: hallwayAddNode
+-- WORKS: hallwayGetNodes
+-- WORKS: hallwayGetStartIntersection
+-- WORKS: hallwayGetAllIntersections
+-- WORKS: hallwayAddIntersection
+-- WORKS: hallwayGetLength
 
 -- ---------------------------------------------------------------------------------------
 -- ******** CLASSROOM ********
@@ -156,8 +156,10 @@ testIntersectionDisplay = do
                      intersectionDisplayInfo intersectionA
                      putStrLn ("\nDisplaying intersectionB:")
                      intersectionDisplayInfo intersectionB
--- addHallway
--- 
--- FIX: 
+
+-- FIX: intersectionAddHallway
+-- TEST: intersectionGetConnectedHallways
+-- FIX: intersectionConnectedAddNode
+-- TEST: intersectionGetConnectedNode
 -- WORKS: intersectionDisplayInfo
 -- ---------------------------------------------------------------------------------------
