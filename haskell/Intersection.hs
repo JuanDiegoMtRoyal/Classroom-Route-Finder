@@ -35,6 +35,7 @@ data Intersection = Intersection
 constructorIntersection name positionAlongHallway floor = Intersection name Nothing Nothing positionAlongHallway floor [] []
 
 -- functions
+-- fix, alternative to `elem` or fix `elem`
 addHallway intersection hallway = if hallway `elem` (intersectionConnectedHallways intersection)
                                   then intersection
                                   else intersection { intersectionConnectedHallways = hallway : (intersectionConnectedHallways intersection) }
@@ -42,6 +43,7 @@ addHallway intersection hallway = if hallway `elem` (intersectionConnectedHallwa
 getConnectedHallways intersection = intersectionConnectedHallways intersection
 
 -- fix, helper function isIntersection
+-- fix, find alternative to `elem` or fix `elem`
 addConnectedNode intersection node = if node `elem` (intersectionConnectedNodes intersection) -- || isIntersection node
                                      then intersection
                                      else intersection { intersectionConnectedNodes = node : (intersectionConnectedNodes intersection) }
