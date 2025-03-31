@@ -2,6 +2,7 @@
 import Node
 import Hallway
 import Classroom
+import Intersection
 
 -- ---------------------------------------------------------------------------------------
 -- HERE IS A LIST OF TEST RUNS YOU MAY CALL
@@ -49,8 +50,8 @@ testEqualsCC = do
                 putStrLn ("Is nodeC and nodeC the same?\n" ++ show(equals nodeC nodeC))
 
 -- WORKS: equals
--- ---------------------------------------------------------------------------------------
 
+-- ---------------------------------------------------------------------------------------
 -- ******** HALLWAY ********
 -- FINISHED 03/30/2025
 -- tests constructor for hallway
@@ -68,18 +69,18 @@ hallwayC = constructorHallway "hallwayC" "buildingC" "startIntersectionC" "dirC1
 testHallwayAddNode :: IO ()
 testHallwayAddNode = do
     putStrLn ("Running addNode test..." ++ "\n\nOriginal: \n" ++ show(hallwayC) ++ "\n")
-    let hallwayC'  = addNode hallwayC nodeA  -- First update
+    let hallwayC'  = hallwayAddNode hallwayC nodeA  -- First update
     putStrLn ("Added nodeA: \n" ++ show(hallwayC') ++ "\n")
-    let hallwayC'' = addNode hallwayC' nodeB -- Second update
+    let hallwayC'' = hallwayAddNode hallwayC' nodeB -- Second update
     putStrLn ("Added nodeB: \n" ++ show(hallwayC''))
 
 -- tests getNodes
 testHallwayGetNode :: IO()
 testHallwayGetNode = do
     putStrLn "Running getNodes test....\n"
-    let hallwayC'  = addNode hallwayC nodeA  -- First update
-    let hallwayC'' = addNode hallwayC' nodeB -- Second update
-    let sorted = getNodes hallwayC''
+    let hallwayC'  = hallwayAddNode hallwayC nodeA  -- First update
+    let hallwayC'' = hallwayAddNode hallwayC' nodeB -- Second update
+    let sorted = hallwayGetNodes hallwayC''
     putStrLn ("Sorted Nodes: \n" ++ show sorted)
 
 
@@ -88,28 +89,28 @@ testHallwayGetNode = do
 testHallwayAddIntersection :: IO ()
 testHallwayAddIntersection = do
     putStrLn ("Running addIntersection test..." ++ "\n\nOriginal: \n" ++ show(hallwayA) ++ "\n")
-    let hallwayA'  = addIntersection hallwayA "intersectionAA"  -- First update
+    let hallwayA'  = hallwayAddIntersection hallwayA "intersectionAA"  -- First update
     putStrLn ("Adding intersectionAA as Intersection: \n" ++ show(hallwayA') ++ "\n")
-    let hallwayA'' = addIntersection hallwayA' "intersectionAAAA" -- Second update
+    let hallwayA'' = hallwayAddIntersection hallwayA' "intersectionAAAA" -- Second update
     putStrLn ("Adding intersectionAAAA as Intersection: " ++ show(hallwayA'') ++ "\n")
 
 -- tests getAllIntersections
 testHallwayGetAllIntersections :: IO ()
 testHallwayGetAllIntersections = do
     putStrLn ("Running getAllIntersections test..." ++ "\n\nOriginal: \n" ++ show(hallwayB) ++ "\n")
-    let hallwayB'  = addIntersection hallwayB "intersectionAA"  -- First update
-    let hallwayB'' = addIntersection hallwayB' "intersectionAAAA" -- Second update
+    let hallwayB'  = hallwayAddIntersection hallwayB "intersectionAA"  -- First update
+    let hallwayB'' = hallwayAddIntersection hallwayB' "intersectionAAAA" -- Second update
     putStrLn ("Added 2 intersections...\n")
-    let intersection = getAllIntersections hallwayB''
+    let intersection = hallwayGetAllIntersections hallwayB''
     putStrLn ("All Intersections: \n" ++ show(intersection))
 
 -- tests getLength
 testHallwayGetLength :: IO ()
 testHallwayGetLength = do
-    putStrLn ("Running getLength test..." ++ "\n\nOriginal is: \n" ++ show(getLength hallwayB) ++ "\n")
-    let hallwayB'  = addIntersection hallwayB "intersectionAA"  -- First update
-    let hallwayB'' = addIntersection hallwayB' "intersectionAAAA" -- Second update
-    let length = getLength hallwayB
+    putStrLn ("Running getLength test..." ++ "\n\nOriginal is: \n" ++ show(hallwayGetLength hallwayB) ++ "\n")
+    let hallwayB'  = hallwayAddIntersection hallwayB "intersectionAA"  -- First update
+    let hallwayB'' = hallwayAddIntersection hallwayB' "intersectionAAAA" -- Second update
+    let length = hallwayGetLength hallwayB
     putStrLn ("Length of hallwayB is: \n" ++ show(length))
 
 -- WORKS: addNode
@@ -118,9 +119,10 @@ testHallwayGetLength = do
 -- WORKS: getAllIntersections
 -- WORKS: addIntersection
 -- WORKS: getLength
--- ---------------------------------------------------------------------------------------
 
+-- ---------------------------------------------------------------------------------------
 -- ******** CLASSROOM ********
+-- FINISHED 03/31/2025
 -- test constructor for classroom
 classA :: Classroom
 classA = constructorClassroom "classA" "buildingA" hallwayA 5 "NE" 10
@@ -132,6 +134,30 @@ testClassroomDisplay :: IO()
 testClassroomDisplay = do
                      putStrLn ("Running displayInfo for Classroom...\n")
                      putStrLn ("Displaying classA:")
-                     displayInfo classA
+                     classroomDisplayInfo classA
                      putStrLn ("\nDisplaying classB:")
-                     displayInfo classB
+                     classroomDisplayInfo classB
+
+-- WORKS: classroomDisplayInfo
+-- ---------------------------------------------------------------------------------------
+-- ******** INTERSECTION ********
+-- DATE
+-- test constructor for intersection
+intersectionA :: Intersection
+intersectionA = constructorIntersection "intersectionA" 50 1
+
+intersectionB :: Intersection
+intersectionB = constructorIntersection "intersectionB" 75 2
+
+testIntersectionDisplay :: IO()
+testIntersectionDisplay = do
+                     putStrLn ("Running displayInfo for Intersection...\n")
+                     putStrLn ("Displaying intersectionA:")
+                     intersectionDisplayInfo intersectionA
+                     putStrLn ("\nDisplaying intersectionB:")
+                     intersectionDisplayInfo intersectionB
+-- addHallway
+-- 
+-- FIX: 
+-- WORKS: intersectionDisplayInfo
+-- ---------------------------------------------------------------------------------------

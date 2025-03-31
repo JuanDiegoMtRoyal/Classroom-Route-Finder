@@ -2,10 +2,10 @@ module Intersection
 (
     Intersection,
     constructorIntersection,
-    addHallway,
-    getConnectedHallways,
-    addConnectedNode,
-    getConnectedNode,
+--    intersectionAddHallway,
+    intersectionGetConnectedHallways,
+--    addConnectedNode,
+    intersectionGetConnectedNode,
     intersectionDisplayInfo
 )
 where
@@ -15,10 +15,10 @@ import Hallway (Hallway(..))
 import Data.List (sortOn)
 
 constructorIntersection :: String -> Int -> Int -> Intersection
-addHallway :: Intersection -> Hallway -> Intersection
-getConnectedHallways :: Intersection -> [Hallway]
-addConnectedNode :: Intersection -> Node -> Intersection
-getConnectedNode :: Intersection -> [Node]
+--intersectionAddHallway :: Intersection -> Hallway -> Intersection
+intersectionGetConnectedHallways :: Intersection -> [Hallway]
+--intersectionAddConnectedNode :: Intersection -> Node -> Intersection
+intersectionGetConnectedNode :: Intersection -> [Node]
 intersectionDisplayInfo :: Intersection -> IO()
 
 data Intersection = Intersection
@@ -36,20 +36,20 @@ constructorIntersection name positionAlongHallway floor = Intersection name Noth
 
 -- functions
 -- fix, alternative to `elem` or fix `elem`
-addHallway intersection hallway = if hallway `elem` (intersectionConnectedHallways intersection)
-                                  then intersection
-                                  else intersection { intersectionConnectedHallways = hallway : (intersectionConnectedHallways intersection) }
+--intersectionAddHallway intersection hallway = if hallway `elem` (intersectionConnectedHallways intersection)
+ --                                 then intersection
+  --                                else intersection { intersectionConnectedHallways = hallway : (intersectionConnectedHallways intersection) }
 
-getConnectedHallways intersection = intersectionConnectedHallways intersection
+intersectionGetConnectedHallways intersection = intersectionConnectedHallways intersection
 
 -- fix, helper function isIntersection
 -- fix, find alternative to `elem` or fix `elem`
-addConnectedNode intersection node = if node `elem` (intersectionConnectedNodes intersection) -- || isIntersection node
-                                     then intersection
-                                     else intersection { intersectionConnectedNodes = node : (intersectionConnectedNodes intersection) }
-        where isIntersection :: Node -> Bool
-              isIntersection _ = False
+--intersectionAddConnectedNode intersection node = if node `elem` (intersectionConnectedNodes intersection) -- || isIntersection node
+--                                     then intersection
+ --                                    else intersection { intersectionConnectedNodes = node : (intersectionConnectedNodes intersection) }
+  --      where isIntersection :: Node -> Bool
+   --           isIntersection _ = False
 
-getConnectedNode intersection = sortOn nodePositionAlongHallway (intersectionConnectedNodes intersection)
+intersectionGetConnectedNode intersection = sortOn nodePositionAlongHallway (intersectionConnectedNodes intersection)
 
 intersectionDisplayInfo intersection = putStrLn ("-Arrive at Intersection: " ++ intersectionName intersection ++ " *From here: ")
