@@ -2,6 +2,7 @@
 module Hallway
 (
     Hallway,
+    hallwayName,
     constructorHallway,
     addNode,
     getNodes,
