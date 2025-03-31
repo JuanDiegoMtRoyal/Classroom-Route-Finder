@@ -43,34 +43,53 @@ hallwayC = constructorHallway "test" "add" "intersectionssss" "dir5" "dir6" 5 6 
 -- NOTE: follow this format to UPDATE the previous list
 main :: IO ()
 main = do
+    putStrLn ("Running addNode test..." ++ "\n\nOriginal: \n" ++ show(hallwayC) ++ "\n")
+    let hallwayC'  = addNode hallwayC nodeA  -- First update
+    putStrLn ("Added nodeA: \n" ++ show(hallwayC') ++ "\n")
+    let hallwayC'' = addNode hallwayC' nodeB -- Second update
+    putStrLn ("Added nodeB: \n" ++ show(hallwayC''))
+
+-- tests getNodes
+mainGN :: IO()
+mainGN = do
+    putStrLn "Running getNodes test....\n"
     let hallwayC'  = addNode hallwayC nodeA  -- First update
     let hallwayC'' = addNode hallwayC' nodeB -- Second update
-    print hallwayC''  -- Only this has both nodes
+    let sorted = getNodes hallwayC''
+    putStrLn ("Sorted Nodes: \n" ++ show sorted)
+
 
 -- tests addIntersection
 -- NOTE: follow this format to UPDATE the previous list
 main2 :: IO ()
 main2 = do
+    putStrLn ("Running addIntersection test..." ++ "\n\nOriginal: \n" ++ show(hallwayA) ++ "\n")
     let hallwayA'  = addIntersection hallwayA "SOMETHING1"  -- First update
+    putStrLn ("Adding SOMETHING1 as Intersection: \n" ++ show(hallwayA') ++ "\n")
     let hallwayA'' = addIntersection hallwayA' "SOMETHING2" -- Second update
-    print hallwayA''  -- Only this has both nodes
+    putStrLn ("Adding SOMETHING2 as Intersection: " ++ show(hallwayA'') ++ "\n")
 
 -- tests getAllIntersections
 main3 :: IO ()
 main3 = do
+    putStrLn ("Running getAllIntersections test..." ++ "\n\nOriginal: \n" ++ show(hallwayB) ++ "\n")
     let hallwayB'  = addIntersection hallwayB "SOMETHING1"  -- First update
     let hallwayB'' = addIntersection hallwayB' "SOMETHING2" -- Second update
-    print (getAllIntersections hallwayB'')
+    putStrLn ("Added 2 intersections...\n")
+    let intersection = getAllIntersections hallwayB''
+    putStrLn ("All Intersections: \n" ++ show(intersection))
 
 -- tests getLength
 main4 :: IO ()
 main4 = do
+    putStrLn ("Running getLength test..." ++ "\n\nOriginal is: \n" ++ show(getLength hallwayB) ++ "\n")
     let hallwayB'  = addIntersection hallwayB "SOMETHING1"  -- First update
     let hallwayB'' = addIntersection hallwayB' "SOMETHING2" -- Second update
-    print (getLength hallwayB'')
+    let length = getLength hallwayB
+    putStrLn ("Length of hallwayB is: \n" ++ show(length))
 
 -- WORKS: addNode
--- FIX:   getNodes
+-- WORKS:   getNodes
 -- WORKS: getStartIntersection
 -- WORKS:  getAllIntersections
 -- WORKS: addIntersection
