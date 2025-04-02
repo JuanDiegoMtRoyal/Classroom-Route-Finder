@@ -1,7 +1,7 @@
 module Elevator
 (
     Elevator,
-
+    constrcutorElevator,
     addConnectedNodeName,
     resolveConnections,
     getConnectedNodes,

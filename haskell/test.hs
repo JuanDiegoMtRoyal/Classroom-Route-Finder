@@ -3,6 +3,7 @@ import Node
 import Hallway
 import Classroom
 import Intersection
+import Stairs
 
 -- ---------------------------------------------------------------------------------------
 -- HERE IS A LIST OF TEST RUNS YOU MAY CALL
@@ -35,19 +36,19 @@ nodeC = constructorNode "nodeC" "intersectionC" "hallwayC" 5 6
 testEqualsA :: IO()
 testEqualsA = do
                 putStrLn ("Running equals test on A + A2...\nShould be TRUE:\n")
-                putStrLn ("Is nodeA and nodeA2 the same?\n" ++ show(equals nodeA nodeA2))
+                putStrLn ("Is nodeA and nodeA2 the same?\n" ++ show(nodeA == nodeA2))
 
 -- tests equals for 2 sets of different nodes (FALSE)
 testEqualsAB :: IO()
 testEqualsAB = do
                 putStrLn ("Running equals test on A + B...\nShould be FALSE:\n")
-                putStrLn ("Is nodeA and nodeB the same?\n" ++ show(equals nodeA nodeB))
+                putStrLn ("Is nodeA and nodeB the same?\n" ++ show(nodeA == nodeB))
 
 -- tests equals for nodes against itself (TRUE)
 testEqualsCC :: IO()
 testEqualsCC = do
                 putStrLn ("Running equals test on C + C...\nShould be TRUE:\n")
-                putStrLn ("Is nodeC and nodeC the same?\n" ++ show(equals nodeC nodeC))
+                putStrLn ("Is nodeC and nodeC the same?\n" ++ show(nodeC == nodeC))
 
 -- WORKS: equals
 
@@ -130,6 +131,7 @@ classA = constructorClassroom "classA" "buildingA" hallwayA 5 "NE" 10
 classB :: Classroom
 classB = constructorClassroom "classB" "buildingB" hallwayB 15 "SW" 20
 
+-- test displayInfo
 testClassroomDisplay :: IO()
 testClassroomDisplay = do
                      putStrLn ("Running displayInfo for Classroom...\n")
@@ -139,9 +141,10 @@ testClassroomDisplay = do
                      classroomDisplayInfo classB
 
 -- WORKS: classroomDisplayInfo
+
 -- ---------------------------------------------------------------------------------------
 -- ******** INTERSECTION ********
--- DATE
+-- FINISHED 03/31/2025
 -- test constructor for intersection
 intersectionA :: Intersection
 intersectionA = constructorIntersection "intersectionA" 50 1
@@ -149,6 +152,60 @@ intersectionA = constructorIntersection "intersectionA" 50 1
 intersectionB :: Intersection
 intersectionB = constructorIntersection "intersectionB" 75 2
 
+-- tests addHallway
+testIntersectionAddHallway :: IO()
+testIntersectionAddHallway = do
+                                putStrLn ("Running addHallway for Intersection...\n")
+                                putStrLn ("Displaying original Intersection A:\n" ++ show(intersectionA) ++ "\n")
+                                let testIntA = intersectionAddHallway intersectionA hallwayA
+                                let testIntAA = intersectionAddHallway testIntA hallwayA
+                                putStrLn ("Added 2 identical hallways to intersectionA...\nHallway list should have only one element:\nDisplaying hallways for Intersection A:\n" ++ show(testIntAA) ++ "\n")
+                                putStrLn ("Displaying original Intersection B:\n" ++ show(intersectionB) ++ "\n")
+                                let testIntB = intersectionAddHallway intersectionB hallwayA
+                                let testIntBB = intersectionAddHallway testIntB hallwayB
+                                putStrLn ("Added 2 different hallways to intersectionB...\nDisplaying hallways for Intersection B:\n" ++ show(testIntBB) ++ "\n")
+                                putStrLn ("Calling getConnectedHallways for intersectionB...")
+                                let testIntBBgcn = intersectionGetConnectedHallways testIntBB
+                                putStrLn ("Hallways existing in intersectionB...\nThere should be 2 different hallways:\n" ++ show(testIntBBgcn))
+
+-- tests getConnectedHallways
+testIntersectionGetConnectedHallways :: IO()
+testIntersectionGetConnectedHallways = do
+                                          putStrLn ("Running getConnectedHallways for Intersection...\n")
+                                          let testIntA = intersectionGetConnectedHallways intersectionA
+                                          let testIntA = intersectionGetConnectedHallways intersectionA
+                                          putStrLn ("Displaying for Intersection A:\n" ++ show(testIntA) ++ "\n")
+                                          let testIntB = intersectionGetConnectedHallways intersectionB
+                                          putStrLn ("Displaying for Intersection B:\n" ++ show(testIntB) ++ "\n")
+
+-- tests addConnectedNode
+testIntersectionAddConnectedNode :: IO()
+testIntersectionAddConnectedNode = do
+                                      putStrLn ("Running addConnectedNode for Intersection...\n")
+                                      putStrLn ("Displaying original Intersection A:\n" ++ show(intersectionA) ++ "\n")
+                                      let testIntA = intersectionAddConnectedNode intersectionA nodeA
+                                      let testIntAA = intersectionAddConnectedNode testIntA nodeA
+                                      putStrLn ("Added 2 identical nodes to intersectionA...\nNode list should have only one element:\nDisplaying nodes for Intersection A:\n" ++ show(testIntAA) ++ "\n")
+                                      putStrLn ("Displaying original Intersection B:\n" ++ show(intersectionB) ++ "\n")
+                                      let testIntB = intersectionAddConnectedNode intersectionB nodeA
+                                      let testIntBB = intersectionAddConnectedNode testIntB nodeB
+                                      putStrLn ("Added 2 different nodes to intersectionB...\nDisplaying nodes for Intersection B:\n" ++ show(testIntBB) ++ "\n")
+                                      putStrLn ("Calling getConnectedNodes for intersectionB...")
+                                      let testIntBBgcn = intersectionGetConnectedNodes testIntBB
+                                      putStrLn ("Nodes existing in intersectionB...\nThere should be 2 different nodes:\n" ++ show(testIntBBgcn))
+
+-- tests getConnectedNodes
+testIntersectionGetConnectedNodes :: IO()
+testIntersectionGetConnectedNodes = do
+                                          putStrLn ("Running getConnectedNodes for Intersection...\n")
+                                          let testIntA = intersectionGetConnectedNodes intersectionA
+                                          -- addNode here
+                                          putStrLn ("Displaying nodes for Intersection A:\n" ++ show(testIntA) ++ "\n")
+                                          -- addNode here
+                                          let testIntB = intersectionGetConnectedNodes intersectionB
+                                          putStrLn ("Displaying nodes for Intersection B:\n" ++ show(testIntB) ++ "\n")
+
+-- tests displayInfo
 testIntersectionDisplay :: IO()
 testIntersectionDisplay = do
                      putStrLn ("Running displayInfo for Intersection...\n")
@@ -157,9 +214,47 @@ testIntersectionDisplay = do
                      putStrLn ("\nDisplaying intersectionB:")
                      intersectionDisplayInfo intersectionB
 
--- FIX: intersectionAddHallway
--- TEST: intersectionGetConnectedHallways
--- FIX: intersectionConnectedAddNode
--- TEST: intersectionGetConnectedNode
+-- WORKS: intersectionAddHallway
+-- WORKS: intersectionGetConnectedHallways
+-- WORKS: intersectionAddConnectedNode
+-- WORKS: intersectionGetConnectedNode
 -- WORKS: intersectionDisplayInfo
+
+-- ---------------------------------------------------------------------------------------
+-- ******** STAIRS ********
+-- DATE
+-- test constructor for stairs
+stairsA :: Stairs
+stairsA = constructorStairs "stairsA" 50 1
+
+stairsB :: Stairs
+stairsB = constructorStairs "stairsB" 75 2
+
+-- tests addConnectedNodeName
+testStairsAddConnectedNodeName :: IO()
+testStairsAddConnectedNodeName = do
+                                    putStrLn ("Running addConnectedNodeName for Stairs...\n")
+                                    putStrLn ("Displaying original Stairs A:\n" ++ show(stairsA) ++ "\n")
+                                    let testStairsA = stairsAddConnectedNodeName stairsA (stairsName stairsA)
+                                    let testStairsAA = stairsAddConnectedNodeName testStairsA (stairsName stairsA)
+                                    putStrLn ("Added 2 identical nodes to stairsA...\nDisplaying nodes for Stairs A:\n" ++ show(testStairsAA) ++ "\n")                                    
+                                    let testStairsAB = stairsAddConnectedNodeName testStairsAA (stairsName stairsB)
+                                    putStrLn ("Adding Stairs B...\n" ++ show(testStairsAB))
+
+-- tests resolveConnections
+-- fix
+-- stairsResolveConnections graph = 
+
+-- tests getConnectedNodes
+--stairsGetConnectedNodes
+
+-- tests displayInfo
+--stairsDisplayInfo
+
+
+-- WORKS: stairsAddConnectedNodeName
+-- FIX: stairsResolveConnections
+-- TEST: stairsGetConnectedNodes
+-- TEST: stairsDisplayInfo
+
 -- ---------------------------------------------------------------------------------------

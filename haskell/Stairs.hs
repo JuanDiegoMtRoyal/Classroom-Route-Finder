@@ -1,43 +1,49 @@
 module Stairs
 (
     Stairs,
-
-    addConnectedNodeName,
-    resolveConnections,
-    getConnectedNodes,
-    displayInfo
+    stairsName,
+    stairsConnectedNodes,
+    stairsConnectedNodeNames,
+    constructorStairs,
+    stairsAddConnectedNodeName,
+    --stairsResolveConnections,
+    stairsGetConnectedNodes,
+    stairsDisplayInfo
 )
 where
 
+import Data.List (sortOn)
 import Node (Node(..))
 import Hallway (Hallway(..))
-import intersection (intersection(..))
+import Intersection (Intersection(..))
 
 constructorStairs :: String -> Int -> Int -> Stairs
-addConnectedNodeName :: String -> [String] -> [String]
-resolveConnections :: Graph -> [Node] -> [Node]
-getConnectedNodes :: [Node]
-displayInfo :: Stairs -> IO()
+stairsAddConnectedNodeName :: Stairs -> String -> Stairs
+--stairsResolveConnections :: Graph -> [Node] -> [Node]
+stairsGetConnectedNodes :: Stairs -> [Node]
+stairsDisplayInfo :: Stairs -> IO()
 
 data Stairs = Stairs
     { stairsName :: String,
-      stairsIntersection :: intersection,
-	  stairsHallway :: Hallway,
+      stairsIntersection :: Maybe Intersection,
+      stairsHallway :: Maybe Hallway,
       stairsPositionAlongHallway :: Int,
-      stairsFloor :: Int
-      stairsConnectedNodes :: [Node]
+      stairsFloor :: Int,
+      stairsConnectedNodes :: [Node],
       stairsConnectedNodeNames :: [String]
     } deriving (Show)
 
 -- constructor
-constructorStairs name hallway positionAlongHallway floor
+constructorStairs name positionAlongHallway floor = Stairs name Nothing Nothing positionAlongHallway floor [] []
 
 -- functions
-addConnectedNodeName nodeName connectedNodeNames = nodeName : connectedNodeNames
+stairsAddConnectedNodeName stairs nodeName = if nodeName `elem` (stairsConnectedNodeNames stairs)
+                                  then stairs
+                                  else stairs { stairsConnectedNodeNames = nodeName : (stairsConnectedNodeNames stairs) }
 
 -- fix
-resolveConnections graph = 
+-- stairsResolveConnections graph = 
 
-getConnectedNodes connectedNodes = connectedNodes
+stairsGetConnectedNodes stairs = sortOn nodePositionAlongHallway (stairsConnectedNodes stairs)
 
-displayInfo stairs = putStrLn ("- Take stairs: " ++ stairName stairs ++ " at intersection: " ++ show (stairPositionAlongHallway stairs))
+stairsDisplayInfo stairs = putStrLn ("- Take stairs: " ++ stairsName stairs ++ " at intersection: " ++ show (stairsPositionAlongHallway stairs))
