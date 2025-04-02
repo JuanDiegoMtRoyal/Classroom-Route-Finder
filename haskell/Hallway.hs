@@ -13,8 +13,8 @@ module Hallway
 )
 where
 
-import Node
 import Data.List (sortOn)
+import Node
 -- import Intersection (Intersection(..))
 
 constructorHallway :: String -> String -> String -> String -> String -> Int -> Int -> Hallway
@@ -52,3 +52,6 @@ hallwayGetAllIntersections hallway = hallwayIntersections hallway
 hallwayAddIntersection hallway intersection = hallway { hallwayIntersections = intersection : (hallwayIntersections hallway) }
 
 hallwayGetLength hallway = hallwayLength hallway
+
+instance Eq Hallway
+    where hallway1 == hallway2 = hallwayName hallway1 == hallwayName hallway2
