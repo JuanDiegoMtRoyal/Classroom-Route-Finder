@@ -78,6 +78,17 @@ data BuildingGraph = BuildingGraph
     emptyGraph = BuildingGraph Map.empty Map.empty Map.empty Map.empty Map.empty Map.empty
 
     --Parser 
-    
+    parseBuildingMap :: FilePath -> IO BuildingGraph
+
+    parseBuildingMap filename = do
+    contents <- readFile filename
+    let lines' = filter (not . isCommentOrEmpty) $ lines contents
+    let sections = groupSections lines'
+    foldM parseSection emptyGraph sections
+      where
+    isCommentOrEmpty line = null (trim line) || "#" `isPrefixOf` trim line
+    isPrefixOf prefix str = prefix `eqOnLength` take (length prefix) str
+    eqOnLength a b = length a == length b && a == b
+
 
 
