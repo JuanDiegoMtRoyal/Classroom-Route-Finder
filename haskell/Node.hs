@@ -27,7 +27,7 @@ instance Eq Node
     where node1 == node2 = nodeName node1 == nodeName node2
     
     
-    {- commenting out the stuff below because I think it might be better to have equals work based just on the names unless u have a reason otherwise
+    {- commenting out the stuff below because I think it might be better to hi have equals work based just on the names unless u have a reason otherwise
     
     
      &&
