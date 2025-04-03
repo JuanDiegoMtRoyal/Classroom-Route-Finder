@@ -1,6 +1,7 @@
 module Intersection
 (
-    Intersection,
+    Intersection(..),
+    extractValue,
     constructorIntersection,
     intersectionAddHallway,
     intersectionGetConnectedHallways,
@@ -13,6 +14,8 @@ where
 import Data.List (sortOn)
 import Node (Node(..))
 import Hallway (Hallway(..))
+
+extractValue :: Maybe a -> a
 
 constructorIntersection :: String -> Int -> Int -> Intersection
 intersectionAddHallway :: Intersection -> Hallway -> Intersection
@@ -30,6 +33,11 @@ data Intersection = Intersection
       intersectionConnectedHallways :: [Hallway],
       intersectionConnectedNodes :: [Node]
     } deriving (Show)
+
+-- helper functions
+extractValue maybeValue = case maybeValue of
+                              Just maybeValue -> maybeValue
+                              -- Nothing -> defaultValue
 
 -- construtor
 constructorIntersection name positionAlongHallway floor = Intersection name Nothing Nothing positionAlongHallway floor [] []

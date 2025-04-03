@@ -1,8 +1,7 @@
 -- Intersection has been replace with String type for convenience as of now
 module Hallway
 (
-    Hallway,
-    hallwayName,
+    Hallway(..),
     constructorHallway,
     hallwayAddNode,
     hallwayGetNodes,

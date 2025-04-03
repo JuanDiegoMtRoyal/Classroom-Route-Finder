@@ -1,8 +1,7 @@
 -- Hallway & Intersection have been replaced as String type for convenience as of now
 module Node
 (
-    Node,
-    nodePositionAlongHallway,
+    Node(..),
     constructorNode
     --displayInfo
 )

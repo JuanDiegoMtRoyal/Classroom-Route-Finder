@@ -1,6 +1,6 @@
 module Classroom
 (
-    Classroom,
+    Classroom(..),
     constructorClassroom,
     classroomDisplayInfo
 )
