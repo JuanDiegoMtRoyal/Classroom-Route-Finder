@@ -1,28 +1,29 @@
 module Elevator
 (
-    Elevator,
+    Elevator(..),
     constrcutorElevator,
-    addConnectedNodeName,
-    resolveConnections,
-    getConnectedNodes,
-    displayInfo
+    elevatorAddConnectedNodeName,
+    --elevatorResolveConnections,
+    elevatorGetConnectedNodes,
+    elevatorDisplayInfo
 )
 where
 
+import Data.List (sortOn)
 import Node (Node(..))
 import Hallway (Hallway(..))
 import Intersection (Intersection(..))
 
 constructorElevator :: String -> Hallway -> Int -> Int -> Elevator
-addConnectedNodeName :: Elevator -> String -> Elevator
-resolveConnections :: Elevator -> Graph -> Elevator
-getConnectedNodes :: Elevator -> [Node]
-displayInfo :: Elevator -> IO()
+elevatorAddConnectedNodeName :: Elevator -> String -> Elevator
+--elevatorResolveConnections :: Elevator -> Graph -> Elevator
+elevatorGetConnectedNodes :: Elevator -> [Node]
+elevatorDisplayInfo :: Elevator -> IO()
 
 data Elevator = Elevator
     { elevatorName :: String,
-      elevatorIntersection :: Intersection,
-      elevatorHallway :: Hallway,
+      elevatorIntersection :: Maybe Intersection,
+      elevatorHallway :: Maybe Hallway,
       elevatorPositionAlongHallway :: Int,
       elevatorFloor :: Int,
       elevatorConnectNodes :: [Node],
@@ -30,13 +31,16 @@ data Elevator = Elevator
     } deriving (Show)
 
 -- constructor
-constrcutorElevator name hallway positionAlongHallway floor
+constrcutorElevator name hallway positionAlongHallway floor = name Nothing Nothing positionAlongHallway floor [] []
 
 -- functions
-addConnectedNodeName elevator nodeName = 
+elevatorAddConnectedNodeName elevator nodeName = if nodeName `elem` (elevatorConnectedNodeNames elevator)
+                                                 then elevator
+                                                 else elevator { elevatorConnectedNodeNames = nodeName : (elevatorConnectedNodeNames elevator) }
 
-resolveConnections 
+-- fix
+--elevatorResolveConnections 
 
-getConnectedNodes elevator = elevator 
+elevatorGetConnectedNodes elevator = sortOn nodePositionAlongHallway (elevatorGetConnectedNodes elevator)
 
-displayInfo elevator = putStrLn ("Elevator: " ++ elevatorName elevator ++ " at " ++ show (elevatorPositionAlongHallway elevator) ++ "m along " ++ hallwayName (elevatorHallway elevator))
+elevatorDisplayInfo elevator = putStrLn ("-Take Elevator: " ++ elevatorName elevator ++ " at intersection: " ++ (intersectionName elevatorIntersection))

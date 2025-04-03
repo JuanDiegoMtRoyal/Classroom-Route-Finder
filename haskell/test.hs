@@ -190,20 +190,17 @@ testIntersectionAddConnectedNode = do
                                       let testIntB = intersectionAddConnectedNode intersectionB nodeA
                                       let testIntBB = intersectionAddConnectedNode testIntB nodeB
                                       putStrLn ("Added 2 different nodes to intersectionB...\nDisplaying nodes for Intersection B:\n" ++ show(testIntBB) ++ "\n")
-                                      putStrLn ("Calling getConnectedNodes for intersectionB...")
-                                      let testIntBBgcn = intersectionGetConnectedNodes testIntBB
-                                      putStrLn ("Nodes existing in intersectionB...\nThere should be 2 different nodes:\n" ++ show(testIntBBgcn))
 
 -- tests getConnectedNodes
 testIntersectionGetConnectedNodes :: IO()
 testIntersectionGetConnectedNodes = do
-                                          putStrLn ("Running getConnectedNodes for Intersection...\n")
-                                          let testIntA = intersectionGetConnectedNodes intersectionA
-                                          -- addNode here
-                                          putStrLn ("Displaying nodes for Intersection A:\n" ++ show(testIntA) ++ "\n")
-                                          -- addNode here
-                                          let testIntB = intersectionGetConnectedNodes intersectionB
-                                          putStrLn ("Displaying nodes for Intersection B:\n" ++ show(testIntB) ++ "\n")
+                                      putStrLn ("Running getConnectedNode for Intersection...\n")
+                                      let testIntB = intersectionAddConnectedNode intersectionB nodeA
+                                      let testIntBB = intersectionAddConnectedNode testIntB nodeB
+                                      putStrLn ("Added 2 different nodes to intersectionB...\nDisplaying nodes for Intersection B:\n" ++ show(testIntBB) ++ "\n")
+                                      putStrLn ("Calling getConnectedNodes for intersectionB...")
+                                      let testIntBBgcn = intersectionGetConnectedNodes testIntBB
+                                      putStrLn ("Nodes existing in intersectionB...\nThere should be 2 different nodes:\n" ++ show(testIntBBgcn))
 
 -- tests displayInfo
 testIntersectionDisplay :: IO()
@@ -246,15 +243,28 @@ testStairsAddConnectedNodeName = do
 -- stairsResolveConnections graph = 
 
 -- tests getConnectedNodes
---stairsGetConnectedNodes
+testStairsGetConnectedNodes :: IO()
+testStairsGetConnectedNodes = do
+                                  putStrLn ("Running getConnectedNodes for Stairs...\n")
+                                  putStrLn ("Displaying current nodes in Stairs A:\n" ++ show(stairsConnectedNodes stairsA) ++ "\n")
+                                  let testStairsA = stairsA {stairsConnectedNodes = [nodeA, nodeB]}
+                                  let testStairsGCN = stairsGetConnectedNodes testStairsA
+                                  putStrLn ("Added 2 entries...\nDisplaying getconnectNodes on stairsA:\n" ++ show(testStairsGCN))
 
 -- tests displayInfo
---stairsDisplayInfo
+{-
+testStairsDisplay :: IO()
+testStairsDisplay = do
+                     putStrLn ("Running displayInfo for Stairs...\n")
+                     putStrLn ("Displaying StairsA:")
+                     stairsDisplayInfo stairsA
+                     putStrLn ("\nDisplaying stairsB:")
+                     stairsDisplayInfo stairsB
 
-
+-}
 -- WORKS: stairsAddConnectedNodeName
 -- FIX: stairsResolveConnections
--- TEST: stairsGetConnectedNodes
--- TEST: stairsDisplayInfo
+-- WORKS: stairsGetConnectedNodes
+-- WORKS: stairsDisplayInfo
 
 -- ---------------------------------------------------------------------------------------

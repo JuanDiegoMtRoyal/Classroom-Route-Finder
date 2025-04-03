@@ -1,14 +1,11 @@
 module Stairs
 (
-    Stairs,
-    stairsName,
-    stairsConnectedNodes,
-    stairsConnectedNodeNames,
+    Stairs(..),
     constructorStairs,
     stairsAddConnectedNodeName,
     --stairsResolveConnections,
-    stairsGetConnectedNodes,
-    stairsDisplayInfo
+    stairsGetConnectedNodes
+    --stairsDisplayInfo
 )
 where
 
@@ -21,7 +18,7 @@ constructorStairs :: String -> Int -> Int -> Stairs
 stairsAddConnectedNodeName :: Stairs -> String -> Stairs
 --stairsResolveConnections :: Graph -> [Node] -> [Node]
 stairsGetConnectedNodes :: Stairs -> [Node]
-stairsDisplayInfo :: Stairs -> IO()
+--stairsDisplayInfo :: Stairs -> IO()
 
 data Stairs = Stairs
     { stairsName :: String,
@@ -46,4 +43,8 @@ stairsAddConnectedNodeName stairs nodeName = if nodeName `elem` (stairsConnected
 
 stairsGetConnectedNodes stairs = sortOn nodePositionAlongHallway (stairsConnectedNodes stairs)
 
-stairsDisplayInfo stairs = putStrLn ("- Take stairs: " ++ stairsName stairs ++ " at intersection: " ++ show (stairsPositionAlongHallway stairs))
+{-
+stairsDisplayInfo stairs = putStrLn ("- Take stairs: " ++ stairsName stairs ++ " at intersection: " ++ intersectionName extractedStairs)
+    where extractedStairs :: (Stairs -> Maybe Intersection) -> 
+          extractedStairs = extractValue stairsIntersection stairs
+ -}
