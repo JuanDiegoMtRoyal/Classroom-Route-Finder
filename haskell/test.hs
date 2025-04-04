@@ -4,7 +4,8 @@ import Hallway
 import Classroom
 import Intersection
 import Stairs
-
+--import Elevator
+import Graph
 -- ---------------------------------------------------------------------------------------
 -- HERE IS A LIST OF TEST RUNS YOU MAY CALL
 -- RUN IN GHCi AND THE PRINT WILL SHOW YOU A LIST OF WHAT YOU CAN CALL
@@ -50,7 +51,15 @@ testEqualsCC = do
                 putStrLn ("Running equals test on C + C...\nShould be TRUE:\n")
                 putStrLn ("Is nodeC and nodeC the same?\n" ++ show(nodeC == nodeC))
 
+-- tests extractValue
+notMaybeIntersection :: Intersection
+notMaybeIntersection = extractValue maybeIntersection
+testExtractValue :: IO()
+testExtractValue = do
+                      putStrLn("Running extractValue for Intersection...\n\nDisplaying maybeIntersection:\n" ++ show(notMaybeIntersection))
+
 -- WORKS: equals
+-- WORKS: extractValue
 
 -- ---------------------------------------------------------------------------------------
 -- ******** HALLWAY ********
@@ -152,6 +161,9 @@ intersectionA = constructorIntersection "intersectionA" 50 1
 intersectionB :: Intersection
 intersectionB = constructorIntersection "intersectionB" 75 2
 
+maybeIntersection :: Maybe Intersection
+maybeIntersection = Just (constructorIntersection "test" 1 2)
+
 -- tests addHallway
 testIntersectionAddHallway :: IO()
 testIntersectionAddHallway = do
@@ -216,6 +228,7 @@ testIntersectionDisplay = do
 -- WORKS: intersectionAddConnectedNode
 -- WORKS: intersectionGetConnectedNode
 -- WORKS: intersectionDisplayInfo
+-- WORKS: extractValue
 
 -- ---------------------------------------------------------------------------------------
 -- ******** STAIRS ********
@@ -252,7 +265,6 @@ testStairsGetConnectedNodes = do
                                   putStrLn ("Added 2 entries...\nDisplaying getconnectNodes on stairsA:\n" ++ show(testStairsGCN))
 
 -- tests displayInfo
-{-
 testStairsDisplay :: IO()
 testStairsDisplay = do
                      putStrLn ("Running displayInfo for Stairs...\n")
@@ -261,10 +273,10 @@ testStairsDisplay = do
                      putStrLn ("\nDisplaying stairsB:")
                      stairsDisplayInfo stairsB
 
--}
+
 -- WORKS: stairsAddConnectedNodeName
 -- FIX: stairsResolveConnections
 -- WORKS: stairsGetConnectedNodes
--- WORKS: stairsDisplayInfo
+-- FIX: stairsDisplayInfo
 
 -- ---------------------------------------------------------------------------------------

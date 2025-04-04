@@ -6,8 +6,8 @@ module Classroom
 )
 where
 
-import Node (Node(..))
-import Hallway (Hallway(..))
+import Node
+import Hallway
 
 constructorClassroom :: String -> String -> Hallway -> Int -> String -> Int -> Classroom
 classroomDisplayInfo :: Classroom -> IO()

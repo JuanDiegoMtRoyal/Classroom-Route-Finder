@@ -10,9 +10,9 @@ module Elevator
 where
 
 import Data.List (sortOn)
-import Node (Node(..))
-import Hallway (Hallway(..))
-import Intersection (Intersection(..))
+import Node
+import Hallway
+import Intersection
 
 constructorElevator :: String -> Hallway -> Int -> Int -> Elevator
 elevatorAddConnectedNodeName :: Elevator -> String -> Elevator

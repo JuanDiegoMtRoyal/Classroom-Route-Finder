@@ -2,13 +2,16 @@
 module Node
 (
     Node(..),
-    constructorNode
+    constructorNode,
+    extractValue
     --displayInfo
 )
 where
 
 constructorNode :: String -> String -> String -> Int -> Int -> Node
 -- displayInfo :: Node -> IO()
+
+extractValue :: Maybe a -> a
 
 data Node = Node
     { nodeName :: String,
@@ -21,6 +24,12 @@ data Node = Node
 -- constructor
 constructorNode name intersection hallway positionAlongHallway floor = Node name intersection hallway positionAlongHallway floor
 
+-- functions
+-- helper functions for other classes
+extractValue maybeValue = case maybeValue of
+                              Just maybeValue -> maybeValue
+                              -- Nothing -> defaultValue
+							  
 -- compares the name of 2 nodes => returns true if the same, else false
 instance Eq Node
     where node1 == node2 = nodeName node1 == nodeName node2

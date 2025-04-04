@@ -3,22 +3,23 @@ module Stairs
     Stairs(..),
     constructorStairs,
     stairsAddConnectedNodeName,
-    --stairsResolveConnections,
-    stairsGetConnectedNodes
-    --stairsDisplayInfo
+    stairsResolveConnections,
+    stairsGetConnectedNodes,
+    stairsDisplayInfo
 )
 where
 
 import Data.List (sortOn)
-import Node (Node(..))
-import Hallway (Hallway(..))
-import Intersection (Intersection(..))
+import Node
+import Hallway
+import Intersection
+import Graph
 
 constructorStairs :: String -> Int -> Int -> Stairs
 stairsAddConnectedNodeName :: Stairs -> String -> Stairs
---stairsResolveConnections :: Graph -> [Node] -> [Node]
+stairsResolveConnections :: Stairs -> Graph -> Stairs
 stairsGetConnectedNodes :: Stairs -> [Node]
---stairsDisplayInfo :: Stairs -> IO()
+stairsDisplayInfo :: Stairs -> IO()
 
 data Stairs = Stairs
     { stairsName :: String,
@@ -39,12 +40,18 @@ stairsAddConnectedNodeName stairs nodeName = if nodeName `elem` (stairsConnected
                                   else stairs { stairsConnectedNodeNames = nodeName : (stairsConnectedNodeNames stairs) }
 
 -- fix
--- stairsResolveConnections graph = 
+stairsResolveConnections stairs graph = let resolvedNodes = mapMaybe (graphGetNode graph) (stairsConnectedNodeNames stairs)
+                                            updatedStairs = foldl helperGraphAddConnectionStairs resolvedNodes in updatedStairs
+
+-- helper function for stairsResolveConnections
+helperGraphAddConnectionStairs :: Stairs -> Node -> Stairs
+helperGraphAddConnectionStairs stairs node | isStairs node = stairsAddConnection stairs node
+                                           | isIntersection node = intersectionAddConnection stairs node
+                                           | otherwise = stairs { stairsConnectedNodes = node : (stairsConnectedNodes stairs) }
+
 
 stairsGetConnectedNodes stairs = sortOn nodePositionAlongHallway (stairsConnectedNodes stairs)
 
-{-
-stairsDisplayInfo stairs = putStrLn ("- Take stairs: " ++ stairsName stairs ++ " at intersection: " ++ intersectionName extractedStairs)
-    where extractedStairs :: (Stairs -> Maybe Intersection) -> 
-          extractedStairs = extractValue stairsIntersection stairs
- -}
+stairsDisplayInfo stairs = putStrLn ("- Take stairs: " ++ stairsName stairs ++ " at intersection: " ++ intersectionName extractedIntersection)
+    where extractedIntersection :: Intersection
+          extractedIntersection = extractValue (stairsIntersection stairs)
