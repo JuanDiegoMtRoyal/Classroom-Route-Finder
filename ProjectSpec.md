@@ -28,9 +28,12 @@
 
 ### Example Command:
 ```
+Java version:
 java Main EB1207 EB3204 2 FALSE
+Haskell version:
+**------------------------**
 ```
-***insert haskall example
+
 
 # Core Logic
 * ### **Pathfinding Algorithm:** Depth First Search (DFS) with back tracking for:
@@ -87,7 +90,10 @@ You have arrived. Total time taken: 0 minutes and 52 seconds.
 
 # Limitations or Bugs
 
---to add
+* The program does not find the shortest path, it only finds a path.
+    * All the nodes are sorted by position on a hallway and the path finding algorithm prioritizes nodes with a lower value, therefore it will alway explore that direction there which could lead to longer than necessary paths unless the time constraint is minimized.
+* Only routes between classrooms are implemented and not other spaces such as washrooms and water fountains.
+* The program cannot be made aware easily of any dynamic obstacles in the future such as construction work blocking certain paths
 
 
 # Project Outcomes 
@@ -95,6 +101,7 @@ You have arrived. Total time taken: 0 minutes and 52 seconds.
 * Data Structures: Custom Node class, graph representation
 * Imperative programming: Java implementation
 * Declarative Programming: Haskall implementation
+
 
 
 
