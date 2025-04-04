@@ -21,13 +21,13 @@
 
 ## Test Cases
 ### Normal Cases(No Mobility Issues)
-1. **Same Floor Navigation**
+**Same Floor Navigation**
 |Test Case                                     |Input                                                |Expected                |Java Output             | Haskell Output     |
 |----------------------------------------------|-----------------------------------------------------|------------------------|------------------------|--------------------|
 | **Same Floor Navigation** <br>(Same hallway) |Java Main EB1108 EB1102 <BR> hASKELL INPUT           |                        |                        |                    |  
 | **Same Floor Navigation** <br>(Different hallway) |Java Main EB1108 EB1102 <BR> hASKELL INPUT           |                        |                        |                    |  
 
-2. **Different Floor Navigation**
+**Different Floor Navigation**
 |Test Case                                     |Input                                                |Expected                |Java Output             | Haskell Output     |
 |----------------------------------------------|-----------------------------------------------------|------------------------|------------------------|--------------------|
 | **Different Floor Navigation** |Java Main EB1108 EB1102 <BR> hASKELL INPUT           |                        |                        |                    |  
