@@ -12,10 +12,10 @@
 * Text based directions using compass navigation
 
 ### Scope: 
-* Initial implementation for Bisset Business (EB) building
+* Initial implementation for Bisset Business (EB) building (all floors)
 * Supports inputs: starting/destination rooms, time limit, mobility constraints
 * Outputs step by step directions or error messages
-
+* Only classes we deemed as actual classrooms were included (ex. storage closets and offices were omitted)
 
 ## Functional Requirements
 ### User Inputs
@@ -23,7 +23,7 @@
 |--------------|---------------------|-------------------------------------|
 |Starting Room | String (ex. EB1113) |Must exists in the building's dataset|
 |Destination Room | String (ex. EB2138) |Must exists in the building's dataset|
-|Time Constraint | Integer (Minutes) |Rejects if not in the range 1>= t <= 6|
+|Time Constraint | Integer (Minutes) |Rejects if not in the range 1 ≤ t ≤ 6|
 |Mobility Constraint | Boolean (TRUE/FALSE) |True enables elevator only routes, false enables stairs only routes|
 
 ### Example Command:
@@ -33,10 +33,10 @@ java Main EB1207 EB3204 2 FALSE
 ***insert haskall example
 
 # Core Logic
-* **Pathfinding Algorithm:** Depth First Search (DFS) with back tracking for:
+* ### **Pathfinding Algorithm:** Depth First Search (DFS) with back tracking for:
 * Dead ends (Stairs when mobility = TRUE)
 * Exceeding time constraints
-* **Time Calculation:**
+* ### **Time Calculation:**
 * 1 meter = 1 second
 * Stairs and elevators cost 30 seconds between floors
 * Distances derived from GIS technology (jk using a ruler against the monitor as well as google maps measure tool)
@@ -80,11 +80,24 @@ You have arrived. Total time taken: 0 minutes and 52 seconds.
 |Usability | Text output readable via CLI |
 |Scalability |Supports adding new buildings incrementally|
 
+# Heuristics
+* **6 mins upper time constraint limit:** chosen because it should not take more than that to walk between any 2 classes in the Bisset building without distractions
+* **Coordinate System:** Based on actual coordinates but specific classrooms were assigned a quadrant based on the vibes/what we felt they were closer to (NW/SE/SW/NE)
+* **Time to cover 1 meter:** One second was chosen to cover one meter because upon Kini's request JD personally tested this metric during the tutorial and it seemed legit
+
+# Limitations or Bugs
+
+--to add
+
+
 # Project Outcomes 
 * Graph Theory: DFS traversal with weighted edges
 * Data Structures: Custom Node class, graph representation
 * Imperative programming: Java implementation
 * Declarative Programming: Haskall implementation
+
+
+
 
 
 
