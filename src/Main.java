@@ -11,6 +11,9 @@ public class Main {
 
             String startRoom = args[0].toUpperCase(); // Starting classroom
             String endRoom = args[1].toUpperCase(); // Destination classroom
+            if(startRoom.equals(endRoom)){
+                throw new IllegalArgumentException("Start Classroom must be different than Destination Classroom");
+            }
             int timeConstraint;
             try {
                 timeConstraint = Integer.parseInt(args[2]); // Time constraint in minutes
