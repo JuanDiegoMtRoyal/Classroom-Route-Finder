@@ -10,14 +10,9 @@
 * **Scope:** Covers unit tests, integration tests, and manual validation for path finding, input validation, and accessibility logic
 
 ## Test Environment 
-* My **beast** computer and Kinis dinky laptop
-* Test Data: Predefined building maps in inputtxt
-* Software: Insert software
-
-
-
-## Test Strategy
-
+* Amd Ryzen 5 2600 3.4 GHz and Kinis dinky laptop -1000GHZ
+* Test Data: Predefined building maps in provided building txt file
+* Software: Visual Studio Code with JDK and GHC 
 
 ## Test Cases                                                      
 ### Normal Cases(No Mobility Issues)
@@ -54,12 +49,6 @@
 | **Invalid time  (-1)**  |```java Main EB2039 EB3120 -1  TRUE```  <BR> hASKELL INPUT           |                        |  Error: Time constraint must be between 1 and 6 minuets                      |                    | 
 | **Extreme Opposite Ends of Building**  |```java Main EB1028 EB3135 4 FALSE```  <BR> hASKELL INPUT           |                        | Route Directions:<br>-Go NW towards Classroom: EB1028 at 56m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1023 at 52m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1022 at 48m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1015 at 44m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1014 at 36m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1011 at 34m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1010 at 32m along hallwayEB1_SE_NW<br>-Go SW towards Classroom: EB1007 at 20m along hallwayEB1_SE_NW<br>-Go SW towards Classroom: EB1006 at 16m along hallwayEB1_SE_NW<br>-Go SW towards Classroom: EB1002 at 12m along hallwayEB1_SE_NW<br>-Arrive at Intersection: bisset_South_Intersection_F1<br>*From here:<br>-Take Stairs: stairsEB04_F1 at intersection: bisset_South_Intersection_F1<br>-Take Stairs: stairsEB04_F2 at intersection: bisset_South_Intersection_F2<br>-Take Stairs: stairsEB04_F3 at intersection: bisset_South_Intersection_F3<br>-Arrive at Intersection: bisset_South_Intersection_F3<br>*From here:<br>-Go SE towards Classroom: EB3108 at 8m along hallwayEB3_SW_NE<br>-Go NE towards Classroom: EB3112 at 18m along hallwayEB3_SW_NE<br>-Go NE towards Classroom: EB3120 at 22m along hallwayEB3_SW_NE<br>-Go NE towards Classroom: EB3126 at 38m along hallwayEB3_SW_NE<br>-Go NE towards Classroom: EB3130 at 42m along hallwayEB3_SW_NE<br>-Go NE towards Classroom: EB3134 at 49m along hallwayEB3_SW_NE<br>-Go NE towards Classroom: EB3135 at 50m along hallwayEB3_SW_NE<br>You have arrived. Total time taken: 2 minutes and 46 seconds.                       |                    | 
 
-### Special Cases
-|Test Case                                     |Input                                                |Expected                |Java Output             | Haskell Output     |
-|----------------------------------------------|-----------------------------------------------------|------------------------|------------------------|--------------------|
-| **Same Start and End Classroom**  |Java  <BR> hASKELL INPUT           |                        |                        |                    | 
-| **Multiple Path Options**  |Java  <BR> hASKELL INPUT           |                        |                        |                    | 
-| **Multiple Path Options** <br> time constraint too tight for first path  |Java  <BR> hASKELL INPUT           |                        |                        |                    | 
 
 ## Test Data Requirements
 * Complete building data file
@@ -77,4 +66,6 @@
 * Mobility constraints should never suggest elevator usage when false
 * Time constraints should be strictly enforced
 * All output should include clear directions (according to modelling diagram) and estimated time
+
+
 
