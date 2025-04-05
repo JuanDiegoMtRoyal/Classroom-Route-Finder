@@ -24,8 +24,8 @@
 **Same Floor Navigation**
 |Test Case                                     |Input                                                |Expected                |Java Output             | Haskell Output     |
 |----------------------------------------------|-----------------------------------------------------|------------------------|------------------------|--------------------|
-| **Same Floor Navigation** <br>(Same hallway) |Java Main EB1108 EB1102 <BR> hASKELL INPUT           |                        |                        |                    |  
-| **Same Floor Navigation** <br>(Different hallway) |Java Main EB1108 EB1102 <BR> hASKELL INPUT           |                        |                        |                    |  
+| **Same Floor Navigation** <br>(Same hallway) |java Main EB1108 EB1102 2 False <BR> hASKELL INPUT   |                        | Route Directions:<br> -Go SE towards Classroom: EB1108 at 23m along hallwayEB1_SW_NE <br> -Go SE towards Classroom: EB1107 at 17m along hallwayEB1_SW_NE <br> -Go SE towards Classroom: EB1102 at 16m along hallwayEB1_SW_NE <br> You have arrived. Total time taken: 0 minutes and 7 seconds.  |                    |  
+| **Same Floor Navigation** <br>(Different hallway) |java Main EB1109 EB1015 2 false<BR> hASKELL INPUT           |                        |   Route Directions:<br>-Go NE towards Classroom: EB1109 at 24m along hallwayEB1_SW_NE<br>-Go SE towards Classroom: EB1108 at 23m along hallwayEB1_SW_NE<br>-Go SE towards Classroom: EB1107 at 17m along hallwayEB1_SW_NE<br>-Go SE towards Classroom: EB1102 at 16m along hallwayEB1_SW_NE<br>-Arrive at Intersection: bisset_South_Intersection_F1<br>*From here:<br>-Go SW towards Classroom: EB1002 at 12m along hallwayEB1_SE_NW<br>-Go SW towards Classroom: EB1006 at 16m along hallwayEB1_SE_NW<br>-Go SW towards Classroom: EB1007 at 20m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1010 at 32m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1011 at 34m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1014 at 36m along hallwayEB1_SE_NW<br>-Go NW towards Classroom: EB1015 at 44m along hallwayEB1_SE_NW<br>You have arrived. Total time taken: 1 minutes and 8 seconds.                     |                    |  
 
 **Different Floor Navigation**
 |Test Case                                     |Input                                                |Expected                |Java Output             | Haskell Output     |
@@ -78,7 +78,6 @@
 * Mobility constraints should never suggest elevator usage when false
 * Time constraints should be strictly enforced
 * All output should include clear directions (according to modelling diagram) and estimated time
-
 
 
 
