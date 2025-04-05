@@ -7,7 +7,7 @@ import qualified Data.Maybe as Maybe
 import Data.Char
 import System.IO
 import Control.Monad
-import Debug.Trace
+import Debug.Trace -- used as a temporary solution to error printing
 
 import DataTypes
 import Graph
@@ -22,7 +22,7 @@ data Parser = Parser
 createParser :: Graph -> Parser
 createParser graph = Parser graph
 
--- Initialize building map from file
+-- Initialize building map from file.txt
 initializeBuildingMap :: Parser -> FilePath -> IO Graph
 initializeBuildingMap parser filename = do
     contents <- readFile filename
@@ -31,13 +31,14 @@ initializeBuildingMap parser filename = do
     let resolvedGraph = resolveAllConnections graph
     return resolvedGraph
 
--- Split a string into lines
+-- Split a string into lines, easier for parsing
 splitLines :: String -> [String]
 splitLines = lines
 
 -- Trim whitespace from a string
+-- Note: it is reversed in case there is existing whitespace at the end!
 trim :: String -> String
-trim = dropWhile isSpace . reverse . dropWhile isSpace . reverse
+trim s = dropWhile isSpace(reverse(dropWhile isSpace(reverse s)))
 
 -- Parse lines from the file
 parseLines :: [String] -> Graph -> String -> (Graph, String)
