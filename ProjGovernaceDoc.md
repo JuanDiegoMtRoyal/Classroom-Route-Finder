@@ -45,22 +45,15 @@
 * Documentation: Markdown 
 
 ## Quality Assurance
-### **Testing Strategy:** 
-* Manual testing of pathfinding scenerios
-* Edge case testing(Invalid inputs, time constraints)
-### **Code Standards:**
-* Descriptive variable/method names
-* Consistent formatting
-* Camel case naming convention
+ See QualityAssuranceDoc.md
 
 ## Timeline & Milestones
 * ### **Key Dates:**
 * **Jan 27:** Updated Concept memo sent and approved
+* **Jan 31:** All objects required decided upon
 * **Mar 4:** Imperative partial solution presented
-* # !!!add more dates
-* **date:** Imperative solution complete
-* 
-
+* **Redacted:** Imperative solution complete
+* **Redacted** Haskell solution complete
 * **Apr 4:** Final submission
 
 ## Decision Making
@@ -80,3 +73,5 @@
 |Switching between hallways at intersections|Intersection holds nodes of classrooms in the index closest to it from hallways so it can go into the hallway(since hallway is not a node)             |
 |Avoiding stairs and elevators when traversing the same floor |Can only get to those nodes through intersection and only if switching floors|
 |Debugging incorrect solutions/no solution when one should exist |Adding various logs throughout the entire code |
+
+
