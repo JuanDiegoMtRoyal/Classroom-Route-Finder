@@ -53,7 +53,7 @@
 * **Jan 31:** All objects required decided upon
 * **Mar 4:** Imperative partial solution presented
 * **Redacted:** Imperative solution complete
-* **Redacted** Haskell solution complete
+* **NA** Haskell solution complete
 * **Apr 4:** Final submission
 
 ## Decision Making
