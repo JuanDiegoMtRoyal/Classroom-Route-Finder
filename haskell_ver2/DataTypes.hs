@@ -24,7 +24,7 @@ data Hallway = Hallway
       hIntersections :: [Intersection]
     } deriving (Show)
 
--- Main Node data type defined as a sum type of all possible nodes (Java implementation used "extended"
+-- Main Node data type defined as a sum type of all possible nodes (Java implementation used "extended")
 data Node =
     ClassroomNode 
     { cName :: String,
@@ -56,7 +56,7 @@ data Node =
     | HallwayNode Hallway
     deriving (Show)
 
--- Extract common fields from any Node
+-- Extracting common fields from any Node (used primarily for searching using name)
 -- name
 nodeName :: Node -> String
 nodeName (ClassroomNode name _ _ _ _ _) = name
