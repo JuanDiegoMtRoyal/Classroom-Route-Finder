@@ -100,27 +100,27 @@ displayInfo :: Node -> IO ()
 -- CLASSROOM DISPLAY
 -- case where classroom does exist in a hallway
 displayInfo (ClassroomNode name _ _ (Just hallway) pos compassDir) = 
-    putStrLn $ "-Go " ++ compassDir ++ " towards Classroom: " ++ name ++ " at " ++ show pos ++ "m along " ++ hName hallway
+    putStrLn ("-Go " ++ compassDir ++ " towards Classroom: " ++ name ++ " at " ++ show pos ++ "m along " ++ hName hallway)
 -- case where classroom does not have a hallway (such as standing in the same position where no traversal is needed).
 displayInfo (ClassroomNode name _ _ Nothing pos compassDir) = 
-    putStrLn $ "-Go " ++ compassDir ++ " towards Classroom: " ++ name ++ " at " ++ show pos ++ "m"
+    putStrLn ("-Go " ++ compassDir ++ " towards Classroom: " ++ name ++ " at " ++ show pos ++ "m")
 
 -- STAIRS DISPLAY
 -- case where stairs exist at an intersection point
 displayInfo (StairsNode name _ (Just intersection) _ _ _ _) = 
-    putStrLn $ "-Take Stairs: " ++ name ++ " at intersection: " ++ iName intersection
+    putStrLn ("-Take Stairs: " ++ name ++ " at intersection: " ++ iName intersection)
 -- case where stairs are not at any intersection point
 displayInfo (StairsNode name _ Nothing _ _ _ _) = 
-    putStrLn $ "-Take Stairs: " ++ name
+    putStrLn ("-Take Stairs: " ++ name)
 
 -- ELEVATOR DISPLAY
 -- case where Elevator exists at an intersection point
 displayInfo (ElevatorNode name _ (Just intersection) _ _ _ _) = 
-    putStrLn $ "-Take Elevator: " ++ name ++ " at intersection: " ++ iName intersection
+    putStrLn ("-Take Elevator: " ++ name ++ " at intersection: " ++ iName intersection)
 -- case where Elevator is not at any intersection point
 displayInfo (ElevatorNode name _ Nothing _ _ _ _) = 
-    putStrLn $ "-Take Elevator: " ++ name
+    putStrLn ("-Take Elevator: " ++ name)
 
 -- INTERSECTION DISPLAY
 displayInfo (IntersectionNode i) = do
-    putStrLn $ "\n-Arrive at Intersection: " ++ iName i ++ "\n*From here: "
+    putStrLn ("\n-Arrive at Intersection: " ++ iName i ++ "\n*From here: ")

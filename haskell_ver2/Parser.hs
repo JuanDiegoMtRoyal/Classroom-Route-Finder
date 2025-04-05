@@ -26,7 +26,7 @@ createParser graph = Parser graph
 initializeBuildingMap :: Parser -> FilePath -> IO Graph
 initializeBuildingMap parser filename = do
     contents <- readFile filename
-    let lines = filter (not . null) $ map trim $ splitLines contents
+    let lines = filter (not . null) (map trim (splitLines contents))
     let (graph, _) = parseLines lines (pGraph parser) "Unknown"
     let resolvedGraph = resolveAllConnections graph
     return resolvedGraph
@@ -73,7 +73,7 @@ isInfixOf :: String -> String -> Bool
 isInfixOf needle haystack = any (isPrefixOf needle) (tails haystack)
   where
     tails [] = [[]]
-    tails l@(_:xs) = l : tails xs
+    tails l | (_:xs) <- l = l : tails xs
 
 -- Parse hallway information
 parseHallway :: Graph -> String -> Graph
@@ -89,7 +89,7 @@ parseHallway graph line =
         
         maybeStartIntersection = case getNode graph startIntersectionName of
             Just (IntersectionNode i) -> Just i
-            Nothing -> Just $ Intersection startIntersectionName floor 0 [] []
+            Nothing -> Just (Intersection startIntersectionName floor 0 [] [])
             _ -> Nothing
             
         hallway = Hallway name building maybeStartIntersection direction1 direction2 floor length [] []
@@ -176,7 +176,7 @@ parseIntersection graph line =
         
         maybeIntersection = case getNode graph name of
             Just (IntersectionNode i) -> Just i
-            Nothing -> Just $ Intersection name floor posOnHallway [] []
+            Nothing -> Just (Intersection name floor posOnHallway [] [])
             _ -> Nothing
             
         processConnectedItems inter [] = inter
@@ -232,7 +232,7 @@ connectAdjacentNodes graph intersection =
 splitParts :: String -> [String]
 splitParts line =
     let withoutParens = map (\c -> if c == '(' || c == ')' then ',' else c) line
-    in map trim $ split ',' withoutParens
+    in map trim (split ',' withoutParens)
 
 -- Split a string by a delimiter
 split :: Char -> String -> [String]

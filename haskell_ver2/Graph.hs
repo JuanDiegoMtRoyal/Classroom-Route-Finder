@@ -16,7 +16,7 @@ emptyGraph = Graph Map.empty
 
 -- Add a node to the graph
 addNode :: Graph -> Node -> Graph
-addNode graph node = Graph $ Map.insert (nodeName node) node (gNodes graph)
+addNode graph node = Graph (Map.insert (nodeName node) node (gNodes graph))
 
 -- Get a node by name
 getNode :: Graph -> String -> Maybe Node
@@ -67,7 +67,7 @@ resolveAllConnections :: Graph -> Graph
 resolveAllConnections graph =
     let nodes = Map.elems (gNodes graph)
         resolvedNodes = map (resolveNodeConnections graph) nodes
-        newGraph = Graph $ foldr (\node map -> Map.insert (nodeName node) node map) Map.empty resolvedNodes
+        newGraph = Graph (foldr (\node map -> Map.insert (nodeName node) node map) Map.empty resolvedNodes)
     in newGraph
 
 -- Resolve connections for a specific node
