@@ -10,7 +10,7 @@ data Graph = Graph
     { gNodes :: Map.Map String Node,     
       gHallways :: [Hallway],           
       gIntersections :: [Intersection]  
-    }
+    }deriving (Show)
 
 -- Create an empty graph   
 emptyGraph :: Graph
