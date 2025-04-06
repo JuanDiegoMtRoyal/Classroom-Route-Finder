@@ -57,7 +57,7 @@ data Node =
     deriving (Show)
 
 -- Extracting common fields from any Node (used primarily for searching using name)
--- name
+-- Helper functions to find name
 nodeName :: Node -> String
 nodeName (ClassroomNode name _ _ _ _ _) = name
 nodeName (StairsNode name _ _ _ _ _ _) = name
@@ -65,7 +65,7 @@ nodeName (ElevatorNode name _ _ _ _ _ _) = name
 nodeName (IntersectionNode i) = iName i
 nodeName (HallwayNode h) = hName h
 
--- floor
+-- Helper functions to find floor
 nodeFloor :: Node -> Int
 nodeFloor (ClassroomNode _ floor _ _ _ _) = floor
 nodeFloor (StairsNode _ floor _ _ _ _ _) = floor
@@ -73,12 +73,42 @@ nodeFloor (ElevatorNode _ floor _ _ _ _ _) = floor
 nodeFloor (IntersectionNode i) = iFloor i
 nodeFloor (HallwayNode h) = hFloor h
 
--- positionAlongHallway
+-- Helper functions to find positionAlongHallway
 nodePositionAlongHallway :: Node -> Int
 nodePositionAlongHallway (ClassroomNode _ _ _ _ pos _) = pos
 nodePositionAlongHallway (StairsNode _ _ _ _ pos _ _) = pos
 nodePositionAlongHallway (ElevatorNode _ _ _ _ pos _ _) = pos
 nodePositionAlongHallway (IntersectionNode i) = iPositionAlongHallway i
+
+-- Helper functions to find node data since each named differently
+getNodeHallway :: Node -> Maybe Hallway
+getNodeHallway (ClassroomNode _ _ _ hallway _ _) = hallway
+getNodeHallway (StairsNode _ _ _ hallway _ _ _) = hallway
+getNodeHallway (ElevatorNode _ _ _ hallway _ _ _) = hallway
+getNodeHallway _ = Nothing
+
+getNodeIntersection :: Node -> Maybe Intersection
+getNodeIntersection (ClassroomNode _ _ intersection _ _ _) = intersection
+getNodeIntersection (StairsNode _ _ intersection _ _ _ _) = intersection
+getNodeIntersection (ElevatorNode _ _ intersection _ _ _ _) = intersection
+getNodeIntersection _ = Nothing
+
+-- Helper functions to check node types
+isIntersection :: Node -> Bool
+isIntersection (IntersectionNode _) = True
+isIntersection _ = False
+
+isStairs :: Node -> Bool
+isStairs (StairsNode {}) = True
+isStairs _ = False
+
+isElevator :: Node -> Bool
+isElevator (ElevatorNode {}) = True
+isElevator _ = False
+
+hasHallway :: Node -> Bool
+hasHallway node = getNodeHallway node /= Nothing
+
 
 -- For handling equality based on name
 -- implementation of Node (mainly for traversal purposes)
