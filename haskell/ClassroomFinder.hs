@@ -121,20 +121,23 @@ displayRoute route = do
     displayRouteSteps route 0 0
 
 -- Helper function to display route steps with time calculation
--- Displays the time taken
 displayRouteSteps :: [Node] -> Int -> Int -> IO ()
-displayRouteSteps [] totalTime _ = do
-    let minutes = totalTime `div` 60
-        seconds = totalTime `mod` 60
-    putStrLn ("\nYou have arrived. Total time taken: " ++ show minutes ++ " minutes and " ++ show seconds ++ " seconds.")
 
--- Displays the route
+-- Displays the route info (based off displayInfo from DataTypes module)
 displayRouteSteps [node] totalTime _ = do
     displayInfo node
     displayRouteSteps [] totalTime 0
 
+-- Calculating total time cost of route for display
 displayRouteSteps (current:next:rest) totalTime index = do
     displayInfo current
     let timeCost = calculateTimeCost current next
         newTotalTime = totalTime + timeCost
     displayRouteSteps (next:rest) newTotalTime (index + 1)
+
+-- Final display of route
+displayRouteSteps [] totalTime _ = do
+    let minutes = totalTime `div` 60
+        seconds = totalTime `mod` 60
+    putStrLn ("\nYou have arrived. Total time taken: " ++ show minutes ++ " minutes and " ++ show seconds ++ " seconds.")
+
