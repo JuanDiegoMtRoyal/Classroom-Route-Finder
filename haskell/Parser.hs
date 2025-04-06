@@ -313,7 +313,11 @@ initializeBuildingMap parser filename = do
 
 parseLine :: Parser -> String -> Parser
 parseLine parser line | line `isPrefixOf` "hallway" -> parseHallway parser line
+<<<<<<< HEAD
                       | line `isPrefixOf` "EB" -> parseClassrom line
+=======
+                      | line `isPrefixOf` "EB" -> parseClassroom line
+>>>>>>> 7d2f487597de7e9a797835c0cdda7c41b9b4f2ee
                       | line `isPrefixOf` "stairs" -> parseStairs parser line
                       | line `isPrefixOf` "elevator" -> parseElevator parser line
                       | line `isPrefixOf` "bisset" -> parseIntersection parser line
