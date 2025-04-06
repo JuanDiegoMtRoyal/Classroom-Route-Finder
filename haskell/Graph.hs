@@ -14,7 +14,12 @@ data Graph = Graph
 
 -- Create an empty graph   
 emptyGraph :: Graph
-emptyGraph = Graph Map.empty
+emptyGraph = Graph
+    {gNodes = Map.empty
+    , gHallways = []
+    , gIntersections = []
+    }
+
 
 -- Get all nodes
 getAllNodes :: Graph -> Map.Map String Node
