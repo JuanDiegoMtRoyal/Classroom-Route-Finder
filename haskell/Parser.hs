@@ -23,6 +23,24 @@ initializeBuildingMap parser filename = do
     let lines = filter
     -- FIX
 
+parseLine :: Parser -> String -> Parser
+parseLine parser line | line `isPrefixOf` "hallway" -> parseHallway parser line
+-- classroom                      | line `isPrefixOf` 
+                      | line `isPrefixOf` "stairs" -> parseStairs parser line
+                      | line `isPrefixOf` "elevator" -> parseElevator parser line
+                      | line `isPrefixOf` "bisset" -> parseIntersection parser line
+
+parseHallway :: Parser -> String -> Parser
+
+parseClassroom :: Parser -> String -> Parser
+
+parseStairs :: Parser -> String -> Parser
+
+parseElevator :: Parser -> String -> Parser
+
+parseIntersection :: Parser -> String -> Parser
+
+-- Might be useful?
 -- Helper function that checks the type of the Parser
 -- ie.) # Hallway Format:
 -- ie.) # Classroom Format: etc..
