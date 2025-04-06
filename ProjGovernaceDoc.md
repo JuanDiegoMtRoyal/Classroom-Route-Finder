@@ -28,7 +28,7 @@
 
 ## Version Control & Code Management
 * **System:** Github
-* **Collaborative Working Environment** Live Share (on VSCode)
+* **Collaborative Working Environment** Live Share (on Visual Studio Code)
 * **Branching Strategy:** ***main*** branch with any updates to code and creating local backups before pulling
 * **Commits Conventions:** Somewhat descriptive commit messages but mainly the description of the commit was communicated through discord at the time of pushing.
 
