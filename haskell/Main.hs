@@ -4,8 +4,8 @@ import System.Environment ( getArgs )
 import System.Exit (exitFailure, exitWith, ExitCode(..))
 import Control.Exception (catch, IOException)
 import Data.Char (toUpper, toLower) 
-import Graph
-import Parser 
+import Graph 
+--import Parser
 import ClassroomFinder
 
 
@@ -45,15 +45,16 @@ main = do
 
                     putStrLn $ "\nNavigating from Classroom " ++ startRoom ++ " to Classroom " ++ endRoom ++ " with a time constraint of " ++ show timeConstraint ++ " minutes and mobility constraint: " ++ show mobilityConstraints
 
-                    catch(do
-                         putStrLn "Route calculation would happen here"
-                        --let graph = Graph.empty
-                        --parser <- Parser.initializeBuildingMap graph "../data/bissetBuilding.txt"
-                       -- Parser.resolveAllConnections parser
-                        
-                       -- let crf = CRF.new graph
-                       -- route <- CRF.findRoute crf startRoom endRoom timeConstraint mobilityConstraints
-                       -- CRF.displayRoute route
+                    catch (do
+                        putStrLn "\nRoute finding logic would happen here :( :( "
+                        -- Parse the building file and get the graph
+                      --  parsedGraph <- parseBuilding "../data/bissetBuilding.txt"
+                       -- let resolvedGraph = resolveAllConnections parsedGraph
+                           -- crf = newCRF resolvedGraph
+                        --    route = findRoute crf startRoom endRoom timeConstraint mobilityConstraints
+                       -- case route of
+                     --       Just path -> displayRoute path
+                     --       Nothing -> putStrLn "No route found"
                         ) handleException
 
 handleException :: IOException -> IO ()

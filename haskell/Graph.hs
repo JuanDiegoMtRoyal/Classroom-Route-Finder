@@ -1,5 +1,13 @@
-module Graph where
-
+module Graph
+    ( Graph(..)  -- This exports the Graph type and all its constructors
+    , emptyGraph
+    , addNode
+    , addHallway
+    , addIntersection
+    , getNode
+    , resolveAllConnections
+    -- ... other exports ...
+    ) where
 import DataTypes
 import qualified Data.Map as Map
 import qualified Data.List as List

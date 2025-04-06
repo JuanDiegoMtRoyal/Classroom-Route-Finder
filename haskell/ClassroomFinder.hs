@@ -84,7 +84,6 @@ getNeighbors current end mobilityConstraints =
                                  Just index -> 
                                      (if index > 0 then [hallwayNodes !! (index - 1)] else []) ++
                                      (if index < (length hallwayNodes - 1) then [hallwayNodes !! (index + 1)] else [])
-                                     --[hallwayNodes !! i | i <- [index-1, indx+1], i >= 0, i < length hallwayNodes]
 
         -- Node is an instance of Intersection
         IntersectionNode intersection ->
