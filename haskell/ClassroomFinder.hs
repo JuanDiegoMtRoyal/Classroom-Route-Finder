@@ -26,10 +26,10 @@ findRoute crf startRoom endRoom timeConstraint mobilityConstraints =
     in case (maybeStartNode, maybeEndNode) of
             (Nothing, _) -> do
                 --putStrLn ("Classroom does not exist. ERROR with: " ++ startRoom)
-                return []
+                return Nothing []
             (_, Nothing) -> do
                 --putStrLn ("Classroom does not exist. ERROR with: " ++ endRoom)
-                return []
+                return Nothing []
             (Just startNode, Just endNode) -> do
                 let visited = Set.empty  -- starts with an empty set
                     route = []
@@ -38,7 +38,7 @@ findRoute crf startRoom endRoom timeConstraint mobilityConstraints =
                     Just path -> return path
                     Nothing -> do
                         --putStrLn ("No accessible route available.")
-                        return []  -- placeholders
+                        return Nothing []
 
 -- dfs for route finding
 dfs :: Node -> Node -> Int -> Bool -> Set.Set String -> [Node] -> Maybe [Node]

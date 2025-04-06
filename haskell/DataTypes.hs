@@ -4,7 +4,8 @@ import Data.List as List
 import Data.Maybe as Maybe
 
 -- Data types that aren't extended from Node have their own definitions
-data Intersection = Intersection 
+
+data Intersection = Intersection
     { iName :: String,
       iFloor :: Int,
       iPositionAlongHallway :: Int,
@@ -25,7 +26,6 @@ data Hallway = Hallway
     } deriving (Show)
 
 -- Main Node data type defined as a sum type of all possible nodes (Java implementation used "extended")
--- In DataTypes.hs
 data Node =
     ClassroomNode 
     { cName :: String,
@@ -53,8 +53,9 @@ data Node =
       eConnectedNodes :: [Node],
       eConnectedNodeNames :: [String]
     }
-    | IntersectionNode Intersection  -- Keep intersections as nodes
-    deriving (Show)  -- Removed HallwayNode
+    | IntersectionNode Intersection
+    -- removed HallwayNode
+    deriving (Show)
 
 -- Extracting common fields from any Node (used primarily for searching using name)
 -- Helper functions to find name
@@ -63,7 +64,6 @@ nodeName (ClassroomNode name _ _ _ _ _) = name
 nodeName (StairsNode name _ _ _ _ _ _) = name
 nodeName (ElevatorNode name _ _ _ _ _ _) = name
 nodeName (IntersectionNode i) = iName i
-nodeName (HallwayNode h) = hName h
 
 -- Helper functions to find floor
 nodeFloor :: Node -> Int
@@ -71,7 +71,13 @@ nodeFloor (ClassroomNode _ floor _ _ _ _) = floor
 nodeFloor (StairsNode _ floor _ _ _ _ _) = floor
 nodeFloor (ElevatorNode _ floor _ _ _ _ _) = floor
 nodeFloor (IntersectionNode i) = iFloor i
-nodeFloor (HallwayNode h) = hFloor h
+
+-- Helper functions for Hallway
+nodeNameH :: Hallway -> String
+nodeNameH (Hallway name _ _ _ _ _ _ _ _) = name
+
+nodeFloorH :: Hallway -> Int
+nodeFloorH (Hallway _ _ _ _ _ floor _ _ _) = floor
 
 -- Helper functions to find positionAlongHallway
 nodePositionAlongHallway :: Node -> Int

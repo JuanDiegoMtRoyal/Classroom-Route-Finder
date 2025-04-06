@@ -88,24 +88,28 @@ addTestNodes graph =
 
         -- Add all nodes to the graph
         updatedGraph = foldl addNode graph [
-            IntersectionNode int1, 
-            IntersectionNode int2,
-            IntersectionNode int4, 
-            IntersectionNode int7,
-            HallwayNode hall1, 
-            HallwayNode hall3, 
-            HallwayNode hall6,
-            classroom1, 
-            classroom2, 
-            classroom3,
-            classroom4, 
-            classroom5, 
-            classroom6,
-            stairs1, 
-            stairs2,
-            stairs3,
-            elevator1, 
-            elevator2,
-            elevator3
-            ]
+                             classroom1, 
+                             classroom2, 
+                             classroom3,
+                             classroom4, 
+                             classroom5, 
+                             classroom6,
+                             stairs1, 
+                             stairs2,
+                             stairs3,
+                             elevator1, 
+                             elevator2,
+                             elevator3
+                           ]
+        updatedGraph' = foldl addHallway updatedGraph [
+                              hall1, 
+                              hall3, 
+                              hall6
+                           ]
+        updatedGraph'' = foldl addIntersection updatedGraph' [
+                               int1, 
+                               int2,
+                               int4, 
+                               int7
+                           ]
     in updatedGraph
