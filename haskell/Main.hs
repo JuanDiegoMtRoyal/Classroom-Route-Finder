@@ -4,9 +4,10 @@ import System.Environment ( getArgs )
 import System.Exit (exitFailure, exitWith, ExitCode(..))
 import Control.Exception (catch, IOException)
 import Data.Char (toUpper, toLower) 
--- import graph module
--- import parser module
--- import crf module
+import Graph
+import Parser 
+import ClassroomFinder
+
 
 main :: IO ()
 main = do
